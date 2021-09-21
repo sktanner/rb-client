@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import GameCreate from './GameCreate'
 import GameEdit from './GameEdit'
 import GameDisplay from './GameDisplay'
+import {game} from '../../types'
 
 
 type GameIndexProps = {
@@ -12,14 +13,7 @@ type GameIndexProps = {
 type GameIndexState = {
     games: game[],
     updateActive: boolean,
-    gameToUpdate: []
-}
-
-type game = {
-    title: string,
-    description: string,
-    categories: string,
-    image: string
+    gameToUpdate: game | null
 }
 
 class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
@@ -28,7 +22,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         this.state = {
             games: [],
             updateActive: false,
-            gameToUpdate: []
+            gameToUpdate: null
         }
         this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
@@ -42,7 +36,9 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                 'Authorization': `Bearer ${this.props.token}`
             })
         })
-        let json = await res.json() 
+        let json = await res.json()
+        // console.info(json)
+        this.setState({ games: json})
         
         // .then((logData) => {
         //     this.setState({logData: this.state.games})
@@ -51,8 +47,8 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
     }
 
     editUpdateGame = (games: game): void => {
-        this.setState({games: this.state.gameToUpdate})
-        console.log(games);
+        this.setState({gameToUpdate: games})
+        // console.log(games);
     }
 
     updateOn = (): void => {
@@ -77,7 +73,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                 <Col md="9">
                     <GameDisplay games={this.state.games} editUpdateGame={this.editUpdateGame} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}/>
                 </Col>
-                {this.state.updateActive ? <GameEdit gameToUpdate={this.state.gameToUpdate} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames}/> : <></>}
+                {this.state.updateActive && this.state.gameToUpdate ? <GameEdit gameToUpdate={this.state.gameToUpdate} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames}/> : <></>}
             </Row>
         </Container>
         )

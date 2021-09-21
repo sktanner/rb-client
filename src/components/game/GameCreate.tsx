@@ -10,7 +10,8 @@ type GameCreateState = {
     title: string,
     description: string,
     categories: string,
-    image: string
+    image: string,
+    // id: number
 }
 
 class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
@@ -20,27 +21,27 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
             title: "",
             description: "",
             categories: "",
-            image: ""
+            image: "",
+            // id: 0
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
-        // console.log(this.state.title, this.state.description, this.state.categories, this.state.image)
-        let res = await fetch('http://localhost:3000/game/create', {
+        // console.log("working");
+                let res = await fetch('http://localhost:3000/game/create', {
             method: 'POST',
-            body: JSON.stringify({ game: { title: this.state.title, description: this.state.description, categories: this.state.categories, image: this.state.image } }),
+            body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.props.token}`
             })
         })
         let json = await res.json()
-        this.setState({ title: this.state.title, description: this.state.description, categories: this.state.categories, image: this.state.image })
+        this.setState({ title: "", description: "", categories: "" })
         this.props.fetchGames()
-        console.log(this.state.title);
-
+        // console.info(json)
     }
 
     render() {
