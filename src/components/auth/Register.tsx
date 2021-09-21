@@ -1,4 +1,3 @@
-import { type } from "os"
 import React from "react"
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap'
 
@@ -18,6 +17,7 @@ class Register extends React.Component<RegProps, RegState> {
             email: "",
             password: ""
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
 
@@ -31,12 +31,7 @@ class Register extends React.Component<RegProps, RegState> {
             })
         })
         let json = await res.json()
-        
-        // .then(
-        //     (res) => res.json()
-        // ).then((data) => {
-        //     props.updateToken(data.sessionToken)
-        // })
+        this.props.updateToken(json.sessionToken)
     }
 
     render() {

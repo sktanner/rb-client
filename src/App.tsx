@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
-import NavBar from './components/navigation/Navbar';
+import './App.css'
+import React, { ChangeEvent } from 'react'
+import NavBar from './components/navigation/Navbar'
 import Auth from './components/auth/Auth'
+import GameIndex from './components/game/GameIndex'
 
 type AppProps = {}
-
 
 type AppState = {
   token: string
 }
 
-class App extends Component<AppProps, AppState> {
+class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps){
     super(props)
     this.state={
@@ -37,18 +37,18 @@ class App extends Component<AppProps, AppState> {
     this.setState({token: ''})
   }
 
-  // protectedViews = (): void => {
-  //   return (
-  //     this.setState === localStorage.getItem('token') 
-  //     ? <Game token={token}/>
-  //   : <Auth updateToken={updateToken}/>)
-  // }
+  protectedViews = (): JSX.Element => {
+    return (
+      this.state.token === localStorage.getItem('token') 
+      ? <GameIndex token={this.state.token}/>
+    : <Auth updateToken={this.updateToken}/>)
+  }
 
   render(){
   return (
     <div className="App">
       <NavBar />
-      <Auth updateToken={this.updateToken}/>
+      {this.protectedViews()}
     </div>
   )
 }

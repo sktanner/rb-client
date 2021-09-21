@@ -1,59 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+  Button,
   NavbarText
 } from 'reactstrap';
 
-const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+class NavBar extends React.Component {
 
-  const toggle = () => setIsOpen(!isOpen);
+  logout = (): void => {
+    localStorage.clear()
+    window.location.href = "/login"
+}
 
-  return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <Navbar color="light">
+          <NavbarBrand href="/">Board Game Collection</NavbarBrand>
+            <Button onClick={this.logout}>Logout</Button>
+        </Navbar>
+      </div>
+    )
+  }
 }
 
 export default NavBar;

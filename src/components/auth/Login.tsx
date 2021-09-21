@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
 
-type LoginProps = {}
+type LoginProps = {
+    updateToken: (newToken: string) => void
+}
 
 type LoginState = {
     email: string,
@@ -23,12 +25,8 @@ class Login extends React.Component<LoginProps, LoginState> {
             })
         })
         let json = await res.json()
-
-        // .then(
-        //     (response) => response.json()
-        // ).then((data) => {
-        //     props.updateToken(data.sessionToken)
-        // })
+        this.props.updateToken(json.sessionToken)
+        console.log(json);
     }
 
     render(){
