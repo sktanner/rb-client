@@ -2,10 +2,7 @@ import React from 'react';
 import {
   Navbar,
   NavbarBrand,
-  Nav,
-  NavItem,
   Button,
-  NavbarText
 } from 'reactstrap';
 
 class NavBar extends React.Component {
@@ -27,4 +24,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default NavBar

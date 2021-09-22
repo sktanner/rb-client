@@ -3,5 +3,5 @@ export type game = {
     description: string,
     categories: string,
     image?: string,
-    id?: number
+    id: number
 }

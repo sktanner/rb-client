@@ -8,6 +8,7 @@ type GameDisplayProps = {
     fetchGames: () => Promise<void>
     updateOn: () => void
     editUpdateGame: (games: game) => void
+    setSelectedGame: (g:game) => void
 }
 
 type GameDisplayState = {}
@@ -42,6 +43,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                         }}>Update
                         </Button>
                         <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
+                        <Button onClick={() => {this.props.setSelectedGame(game)}}>Leave a note!</Button>
                     </td>
 
                 </tr>
