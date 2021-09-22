@@ -6,7 +6,6 @@ type NoteCreateProps = {
     games: game[],
     token: string,
     gameToReview: game
-    // fetchGames: () => Promise<void>
 }
 
 type NoteCreateState = {
@@ -38,8 +37,6 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         })
         let json = await res.json()
         this.setState({ content: "" })
-        // this.props.fetchGames()
-        // console.info(json)
     }
 
     render() {
@@ -56,7 +53,6 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             </div>
         )
     }
-
 }
 
 export default NoteCreate

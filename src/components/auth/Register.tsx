@@ -1,8 +1,9 @@
 import React from "react"
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import {Form, FormGroup, Label, Input, Button, Badge} from 'reactstrap'
 
 type RegProps = {
     updateToken: (newToken: string) => void
+    togglePortal: () => void
 }
 
 type RegState = {
@@ -47,6 +48,8 @@ class Register extends React.Component<RegProps, RegState> {
                     <Input onChange={(e) => this.setState({password: e.target.value})} name="password" value={this.state.password}/>
                 </FormGroup>
                 <Button type="submit">Sign Up</Button>
+                <br />
+                <Badge href="#" color="light" onClick={this.props.togglePortal}>Already have an account?</Badge>
                 </Form>
             </div>
         )

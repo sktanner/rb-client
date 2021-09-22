@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Badge } from 'reactstrap'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
+    togglePortal: () => void
 }
 
 type LoginState = {
@@ -43,6 +44,8 @@ class Login extends React.Component<LoginProps, LoginState> {
                     <Input onChange={(e) => this.setState({password:e.target.value})} name="password" value={this.state.password}/>
                 </FormGroup>
                 <Button type="submit">Login</Button>
+                <br />
+                <Badge href="#" color="light" onClick={this.props.togglePortal}>Don't have an account?</Badge>
             </Form>
         </div>
     )}
