@@ -5,8 +5,9 @@ import { game } from '../../types'
 type GameDisplayProps = {
     games: game[],
     token: string,
+    // gameToReview: game,
     fetchGames: () => Promise<void>
-    fetchNotes: () => Promise<void>
+    // fetchNotes: () => Promise<void>
     updateOn: () => void
     editUpdateGame: (games: game) => void
     setSelectedGame: (g:game) => void
@@ -44,12 +45,12 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                         }}>Update
                         </Button>
                         <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
-                        <Button onClick={() => {this.props.setSelectedGame(game); this.props.fetchNotes()}}>Leave a note!</Button>
+                        <Button onClick={() => {this.props.setSelectedGame(game)}}>Leave a note!</Button>
+                        {/* ; this.props.fetchNotes() */}
                     </td>
                 </tr>
             )
         })
-
     }
 
     render() {

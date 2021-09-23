@@ -1,10 +1,13 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
-import { game } from '../../types'
+import { game, note } from '../../types'
 
 type NoteEditProps = {
     token: string,
-    gameToReview: game
+    gameToReview: game,
+    noteToUpdate: note,
+    fetchNotes: () => Promise<void>
+    updateOff: () => void
 }
 
 type NoteEditState = {
@@ -34,7 +37,8 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
                 })
             })
             let json = await res.json()
-            this.setState({ content: "" })
+            this.props.fetchNotes()
+            this.props.updateOff()
         } catch (err) {
             console.info(err)
         }
