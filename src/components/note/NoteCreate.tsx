@@ -6,6 +6,8 @@ type NoteCreateProps = {
     games: game[],
     token: string,
     gameToReview: game
+    fetchNotes: () => Promise<void>
+    noteMapper: () => JSX.Element[]
 }
 
 type NoteCreateState = {
@@ -24,7 +26,8 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
     }
 
     async handleSubmit( e: React.FormEvent<HTMLFormElement>): Promise<void> {
-        e.preventDefault()        
+        e.preventDefault()
+        // console.log(this.state.content);    
                 let res = await fetch(`http://localhost:3000/note/${this.state.gameId}/create`, {
             method: 'POST',
             body: JSON.stringify({ content: this.state.content }),
@@ -34,9 +37,10 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             })
         })
         let json = await res.json()
+        console.log(json)
         this.setState({ content: "" })
-        console.log(this.state.content);
-        
+        this.props.fetchNotes()  
+        this.props.noteMapper()      
     }
 
     render() {

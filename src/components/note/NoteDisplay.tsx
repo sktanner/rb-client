@@ -11,6 +11,7 @@ type NoteDisplayProps = {
     updateOn: () => void
     editUpdateNote: (notes: note) => void
     setSelectedNote: (n:note) => void
+    noteMapper: () => JSX.Element[]
 }
 
 type NoteDisplayState = {
@@ -25,43 +26,6 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
         }
     }
 
-    deleteNote(note: note) {
-        fetch(`http://localhost:3000/note/${this.state.gameId}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
-            })
-        })
-        .then(() => this.props.fetchNotes())
-    }
-
-    noteMapper(): JSX.Element[] {
-        return this.props.notes.map((note: note, index: number) => {
-
-            return (
-                <tr key={index}>
-                    <th scope="row"></th>
-                    <td>{note.content}</td>
-                    <td>
-                         <Button color="warning" onClick={() => {
-                            this.props.editUpdateNote(note)
-                            this.props.updateOn() }}>
-                            Update</Button>
-                        <Button color="danger"
-                            onClick={() => { this.deleteNote(note) }}>
-                            Delete</Button>
-                        <Button
-                            onClick={() => { this.props.setSelectedNote(note) }}>
-                            Leave a note!</Button>
-                    </td>
-
-                </tr>
-            )
-        })
-
-    }
-
     render() {
         return (
             <>
@@ -74,7 +38,7 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.noteMapper()}
+                        {this.props.noteMapper()}
                     </tbody>
                 </Table>
             </>
