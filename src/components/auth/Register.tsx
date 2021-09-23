@@ -1,6 +1,6 @@
 import React from "react"
-import {Form, FormGroup, Label, Input, Button, Badge} from 'reactstrap'
-import {user} from '../../types'
+import { Form, FormGroup, Label, Input, Button, Badge, Container, Col } from 'reactstrap'
+import { user } from '../../types'
 
 type RegProps = {
     updateToken: (newToken: string) => void
@@ -24,7 +24,7 @@ class Register extends React.Component<RegProps, RegState> {
     }
 
 
-    async handleSubmit (e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
         let res = await fetch("http://localhost:3000/user/register", {
             method: 'POST',
@@ -38,22 +38,29 @@ class Register extends React.Component<RegProps, RegState> {
     }
 
     render() {
-        return(
-            <div>
-                <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label htmlFor="email">Email</Label>
-                    <Input onChange={(e) => this.setState({email: e.target.value})} name="email" value={this.state.email}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => this.setState({password: e.target.value})} name="password" value={this.state.password}/>
-                </FormGroup>
-                <Button type="submit">Sign Up</Button>
-                <br />
-                <Badge href="#" color="light" onClick={this.props.togglePortal}>Already have an account?</Badge>
+        return (
+            <Container>
+                <h1>Register</h1>
+                <Form className="authForm" onSubmit={this.handleSubmit}>
+                        <FormGroup row>
+                            <Label sm={3} htmlFor="email">Email:</Label>
+                            <Col sm={8}>
+                            <Input onChange={(e) => this.setState({ email: e.target.value })} name="email" value={this.state.email} />
+                            </Col>
+                        </FormGroup>
+                    <br />
+                    <FormGroup row>
+                        <Label sm={3} htmlFor="password">Password:</Label>
+                        <Col sm={8}>
+                        <Input onChange={(e) => this.setState({ password: e.target.value })} name="password" value={this.state.password} />
+                        </Col>
+                    </FormGroup>
+                    <br />
+                    <Button type="submit">Sign Up</Button>
+                    <br />
+                    <Badge href="#" color="light" onClick={this.props.togglePortal}>Already have an account?</Badge>
                 </Form>
-            </div>
+            </Container>
         )
     }
 

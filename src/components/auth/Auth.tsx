@@ -25,7 +25,7 @@ class Auth extends React.Component<AuthProps, AuthState> {
     }
 
     togglePortal = (): void => {
-        this.setState({ showLogin: false })
+        this.setState({ showLogin: !this.state.showLogin })
     }
 
     render() {

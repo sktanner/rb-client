@@ -25,8 +25,6 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
 
     async handleSubmit( e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()        
-        // console.log("working");
-        //TODO: gameid
                 let res = await fetch(`http://localhost:3000/note/${this.state.gameId}/create`, {
             method: 'POST',
             body: JSON.stringify({ content: this.state.content }),
@@ -37,6 +35,8 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         })
         let json = await res.json()
         this.setState({ content: "" })
+        console.log(this.state.content);
+        
     }
 
     render() {

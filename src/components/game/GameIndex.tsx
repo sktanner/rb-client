@@ -6,7 +6,7 @@ import GameDisplay from './GameDisplay'
 import { game, note } from '../../types'
 import Search from '../navigation/Search'
 import NoteCreate from '../note/NoteCreate'
-
+import NoteDisplay from '../note/NoteDisplay'
 
 type GameIndexProps = {
     token: string,
@@ -17,7 +17,9 @@ type GameIndexState = {
     notes: note[],
     updateActive: boolean,
     gameToUpdate: game | null,
+    noteToUpdate: note | null,
     selectedGame: game | null,
+    selectedNote: note | null,
     gameId: number | null
 }
 
@@ -29,10 +31,13 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
             notes: [],
             updateActive: false,
             gameToUpdate: null,
+            noteToUpdate: null,
             selectedGame: null,
+            selectedNote: null,
             gameId: null
         }
         this.fetchGames = this.fetchGames.bind(this)
+        this.fetchNotes = this.fetchNotes.bind(this)
         this.updateOff = this.updateOff.bind(this)
     }
 
@@ -62,7 +67,10 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     editUpdateGame = (games: game): void => {
         this.setState({ gameToUpdate: games })
-        // console.log(games);
+    }
+
+    editUpdateNote = (notes: note): void => {
+        this.setState({ noteToUpdate: notes })
     }
 
     updateOn = (): void => {
@@ -74,6 +82,8 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
     }
 
     setSelectedGame = (g: game) => this.setState({selectedGame: g})
+
+    setSelectedNote = (n: note) => this.setState({selectedNote: n})
 
     componentDidMount(): void {
         this.fetchGames()
@@ -96,6 +106,11 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                             token={this.props.token}
                             gameToReview={this.state.selectedGame}
                             />}
+                    </Col>
+                    <Col md="9">
+                    {this.state.selectedGame &&
+                        <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} gameToReview={this.state.selectedGame} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} setSelectedNote={this.setSelectedNote}
+                        />}
                     </Col>
                     <Col md="9">
                         <GameDisplay games={this.state.games} editUpdateGame={this.editUpdateGame} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}

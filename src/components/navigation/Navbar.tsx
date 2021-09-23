@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="light">
-          <NavbarBrand href="/">Board Game Collection</NavbarBrand>
+          <NavbarBrand>Board Game Collection</NavbarBrand>
             <Button onClick={this.logout}>Logout</Button>
         </Navbar>
       </div>

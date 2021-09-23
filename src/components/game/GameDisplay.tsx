@@ -15,7 +15,7 @@ type GameDisplayState = {}
 
 class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
 
-    async deleteGame(game: game) {
+    deleteGame(game: game) {
         // console.info(game.id)
         fetch(`http://localhost:3000/game/${game.id}`, {
             method: 'DELETE',
@@ -60,6 +60,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                 <Table striped>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Title</th>
                             <th>Description</th>
                             <th>Categories</th>

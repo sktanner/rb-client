@@ -3,10 +3,14 @@ import { Table, Button } from 'reactstrap'
 import { game, note } from '../../types'
 
 type NoteDisplayProps = {
+    games: game[],
     notes: note[],
     token: string,
-    // gameToReview: game
+    gameToReview: game
     fetchNotes: () => Promise<void>
+    updateOn: () => void
+    editUpdateNote: (notes: note) => void
+    setSelectedNote: (n:note) => void
 }
 
 type NoteDisplayState = {
@@ -14,9 +18,15 @@ type NoteDisplayState = {
 }
 
 class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
+    constructor(props: NoteDisplayProps) {
+        super(props)
+        this.state = {
+            gameId: this.props.gameToReview.id
+        }
+    }
 
-    async deleteGame(note: note) {
-        fetch(`http://localhost:3000/game/${this.state.gameId}`, {
+    deleteNote(note: note) {
+        fetch(`http://localhost:3000/note/${this.state.gameId}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -31,19 +41,19 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
 
             return (
                 <tr key={index}>
-                    <th scope="row">{note.id}</th>
+                    <th scope="row"></th>
                     <td>{note.content}</td>
                     <td>
-                        {/* <Button color="warning" onClick={() => {
-                            this.props.editUpdateGame(note)
+                         <Button color="warning" onClick={() => {
+                            this.props.editUpdateNote(note)
                             this.props.updateOn() }}>
                             Update</Button>
                         <Button color="danger"
-                            onClick={() => { this.deleteGame(note) }}>
+                            onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>
                         <Button
-                            onClick={() => { this.props.setSelectedGame(game) }}>
-                            Leave a note!</Button> */}
+                            onClick={() => { this.props.setSelectedNote(note) }}>
+                            Leave a note!</Button>
                     </td>
 
                 </tr>
@@ -55,14 +65,12 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
     render() {
         return (
             <>
-                <h3>Games</h3>
+                <h3>Notes</h3>
                 <hr />
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Categories</th>
+                            <th>Content</th>
                         </tr>
                     </thead>
                     <tbody>

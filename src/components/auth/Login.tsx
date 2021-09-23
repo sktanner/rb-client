@@ -1,6 +1,6 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, Button, Badge } from 'reactstrap'
-import { user } from '../../types'
+import { Form, FormGroup, Label, Input, Button, Badge, Col } from 'reactstrap'
+// import { user } from '../../types'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
@@ -19,6 +19,7 @@ class Login extends React.Component<LoginProps, LoginState> {
             email: "",
             password: ""
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     async handleSubmit (e: React.FormEvent<HTMLFormElement>): Promise<void> {
@@ -39,15 +40,21 @@ class Login extends React.Component<LoginProps, LoginState> {
     return(
         <div>
             <h1>Login</h1>
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label htmlFor="email">Email</Label>
+            <Form className="authForm" onSubmit={this.handleSubmit}>
+                <FormGroup row>
+                    <Label sm={3} htmlFor="email">Email:</Label>
+                    <Col sm={8}>
                     <Input onChange={(e) => this.setState({email:e.target.value})} name="email" value={this.state.email}/>
+                    </Col>
                 </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="password">Password</Label>
+                <br />
+                <FormGroup row>
+                    <Label sm={3} htmlFor="password">Password:</Label>
+                    <Col sm={8}>
                     <Input onChange={(e) => this.setState({password:e.target.value})} name="password" value={this.state.password}/>
+                    </Col>
                 </FormGroup>
+                <br />
                 <Button type="submit">Login</Button>
                 <br />
                 <Badge href="#" color="light" onClick={this.props.togglePortal}>Don't have an account?</Badge>
