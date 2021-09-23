@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, Button, Badge } from 'reactstrap'
+import { user } from '../../types'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
@@ -14,6 +15,10 @@ type LoginState = {
 class Login extends React.Component<LoginProps, LoginState> {
     constructor(props: LoginProps) {
         super(props)
+        this.state = {
+            email: "",
+            password: ""
+        }
     }
 
     async handleSubmit (e: React.FormEvent<HTMLFormElement>): Promise<void> {

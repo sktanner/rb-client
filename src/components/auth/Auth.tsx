@@ -8,14 +8,18 @@ type AuthProps = {
 }
 
 type AuthState = {
-    showLogin: boolean
+    showLogin: boolean,
+    email: string,
+    password: string
 }
 
 class Auth extends React.Component<AuthProps, AuthState> {
     constructor(props: AuthProps) {
         super(props)
         this.state = {
-            showLogin: true
+            showLogin: true,
+            email: "",
+            password: ""
         }
         this.togglePortal = this.togglePortal.bind(this)
     }
@@ -30,13 +34,13 @@ class Auth extends React.Component<AuthProps, AuthState> {
                 <Row>
                     {this.state.showLogin
                         // <Col md="6">
-                        ? <Login
+                        ? <Register
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
                         />
                         // </Col>
                         // <Col md="6" className="login-col">
-                        : <Register
+                        : <Login
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
                         />

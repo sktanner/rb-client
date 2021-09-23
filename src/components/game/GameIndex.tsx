@@ -3,20 +3,22 @@ import { Container, Row, Col } from 'reactstrap'
 import GameCreate from './GameCreate'
 import GameEdit from './GameEdit'
 import GameDisplay from './GameDisplay'
-import { game } from '../../types'
+import { game, note } from '../../types'
 import Search from '../navigation/Search'
 import NoteCreate from '../note/NoteCreate'
 
 
 type GameIndexProps = {
-    token: string
+    token: string,
 }
 
 type GameIndexState = {
     games: game[],
+    notes: note[],
     updateActive: boolean,
     gameToUpdate: game | null,
-    selectedGame: game | null
+    selectedGame: game | null,
+    gameId: number | null
 }
 
 class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
@@ -24,9 +26,11 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         super(props)
         this.state = {
             games: [],
+            notes: [],
             updateActive: false,
             gameToUpdate: null,
-            selectedGame: null
+            selectedGame: null,
+            gameId: null
         }
         this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
@@ -41,13 +45,19 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
             })
         })
         let json = await res.json()
-        // console.info(json)
         this.setState({ games: json })
+    }
 
-        // .then((logData) => {
-        //     this.setState({logData: this.state.games})
-        //     console.log(this.state.games);
-        // })
+    async fetchNotes(): Promise<void> {
+        let res = await fetch(`http://localhost:3000/note/${this.state.gameId}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.props.token}`
+            })
+        })
+        let json = await res.json()
+        this.setState({ notes: json })
     }
 
     editUpdateGame = (games: game): void => {

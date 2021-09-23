@@ -7,14 +7,18 @@ import GameIndex from './components/game/GameIndex'
 type AppProps = {}
 
 type AppState = {
-  token: string
+  token: string,
+  email: string,
+  password: string
 }
 
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps){
     super(props)
     this.state={
-      token:""
+      token:"",
+      email: "",
+      password: ""
     }
   }
 
@@ -40,7 +44,7 @@ class App extends React.Component<AppProps, AppState> {
   protectedViews = (): JSX.Element => {
     return (
       this.state.token === localStorage.getItem('token') 
-      ? <GameIndex token={this.state.token}/>
+      ? <GameIndex token={this.state.token} />
     : <Auth updateToken={this.updateToken}/>)
   }
 

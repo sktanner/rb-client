@@ -1,5 +1,6 @@
 import React from "react"
 import {Form, FormGroup, Label, Input, Button, Badge} from 'reactstrap'
+import {user} from '../../types'
 
 type RegProps = {
     updateToken: (newToken: string) => void
@@ -7,6 +8,7 @@ type RegProps = {
 }
 
 type RegState = {
+    // users: user
     email: string,
     password: string
 }
