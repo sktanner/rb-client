@@ -11,7 +11,8 @@ import NoteEdit from '../note/NoteEdit'
 
 type NoteIndexProps = {
     token: string,
-    gameToReview: game
+    gameToReview: game,
+    // selectedGame: game
 }
 
 type NoteIndexState = {
@@ -20,7 +21,7 @@ type NoteIndexState = {
     updateActive: boolean,
     // gameToUpdate: game | null,
     noteToUpdate: note | null,
-    selectedGame: game | null,
+    // selectedGame: game | null,
     selectedNote: note | null,
     gameId: number
 }
@@ -34,7 +35,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
             updateActive: false,
             // gameToUpdate: null,
             noteToUpdate: null,
-            selectedGame: null,
+            // selectedGame: null,
             selectedNote: null,
             // gameToReview: null,
             gameId: this.props.gameToReview.id
@@ -56,7 +57,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
         })
         let json = await res.json()
         this.setState({ notes: json })
-        // console.info(this.state.gameId)
+        console.info(json)
     }
 
     editUpdateNote = (notes: note): void => {
@@ -71,7 +72,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
         this.setState({ updateActive: false })
     }
 
-    setSelectedGame = (g: game) => this.setState({selectedGame: g})
+    // setSelectedGame = (g: game) => this.setState({selectedGame: g})
 
     setSelectedNote = (n: note) => this.setState({selectedNote: n})
 
@@ -84,10 +85,10 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
     noteMapper(): JSX.Element[] {
         console.log(this.state.notes);
         
-        return this.state.notes.map((note: note, index: number) => {
+        return this.state.notes.map((note: note) => {
 
             return (
-                <tr key={index}>
+                <tr key={note.id}>
                     <th scope="row"></th>
                     <td>{note.content}</td>
                     <td>
@@ -98,9 +99,9 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
                         <Button color="danger"
                             onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>
-                        <Button
+                        {/* <Button
                             onClick={() => { this.setSelectedNote(note) }}>
-                            Leave a note!</Button>
+                            Leave a note!</Button> */}
                     </td>
                 </tr>
             )
@@ -108,7 +109,9 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
     }
 
     deleteNote(note: note) {
-        fetch(`http://localhost:3000/note/${this.state.gameId}`, {
+        console.log(note);
+        
+        fetch(`http://localhost:3000/note/${note.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -122,24 +125,21 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
         return (
             <Container>
                 <Row>
-                    <Search />
-                </Row>
-                <Row>
                     <Col md="3">
-                        {this.state.selectedGame &&
+                        {this.props.gameToReview &&
                             <NoteCreate 
                             games={this.state.games} 
                             token={this.props.token}
-                            gameToReview={this.state.selectedGame}
+                            gameToReview={this.props.gameToReview}
                             fetchNotes={this.fetchNotes} noteMapper={this.noteMapper}
                             />}
                     </Col>
                     <Col md="9">
-                    {this.state.selectedGame &&
-                        <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} gameToReview={this.state.selectedGame} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} setSelectedNote={this.setSelectedNote} noteMapper={this.noteMapper}
+                    {this.props.gameToReview &&
+                        <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} gameToReview={this.props.gameToReview} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} noteMapper={this.noteMapper}
                         />}
                     </Col>
-                    {this.state.selectedGame && this.state.updateActive && this.state.noteToUpdate ? <NoteEdit noteToUpdate={this.state.noteToUpdate} updateOff={this.updateOff} token={this.props.token} fetchNotes={this.fetchNotes} gameToReview={this.state.selectedGame} /> : <></>}
+                    {this.props.gameToReview && this.state.updateActive && this.state.noteToUpdate ? <NoteEdit noteToUpdate={this.state.noteToUpdate} updateOff={this.updateOff} token={this.props.token} fetchNotes={this.fetchNotes} gameToReview={this.props.gameToReview} /> : <></>}
                 </Row>
             </Container>
         )

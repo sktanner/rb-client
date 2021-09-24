@@ -10,7 +10,7 @@ type NoteDisplayProps = {
     fetchNotes: () => Promise<void>
     updateOn: () => void
     editUpdateNote: (notes: note) => void
-    setSelectedNote: (n:note) => void
+    // setSelectedNote: (n:note) => void
     noteMapper: () => JSX.Element[]
 }
 

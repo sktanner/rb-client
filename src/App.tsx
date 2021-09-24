@@ -3,13 +3,15 @@ import React, { ChangeEvent } from 'react'
 import NavBar from './components/navigation/Navbar'
 import Auth from './components/auth/Auth'
 import GameIndex from './components/game/GameIndex'
+import { user } from './types'
 
 type AppProps = {}
 
 type AppState = {
   token: string,
-  email: string,
-  password: string
+  users: user[]
+  // email: string,
+  // password: string
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -17,8 +19,9 @@ class App extends React.Component<AppProps, AppState> {
     super(props)
     this.state={
       token:"",
-      email: "",
-      password: ""
+      users: []
+      // email: "",
+      // password: ""
     }
   }
 
@@ -51,7 +54,7 @@ class App extends React.Component<AppProps, AppState> {
   render(){
   return (
     <div className="App">
-      <NavBar />
+      <NavBar token={this.state.token} users={this.state.users}/>
       {this.protectedViews()}
     </div>
   )

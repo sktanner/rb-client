@@ -28,7 +28,7 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
     async noteUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         try {
-            let res = await fetch(`http://localhost:3000/note/${this.state.gameId}`, {
+            let res = await fetch(`http://localhost:3000/note/${this.props.noteToUpdate.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ content: this.state.content }),
                 headers: new Headers({

@@ -15,5 +15,7 @@ export type note = {
 
 export type user = {
     email: string,
-    password: string
+    password: string,
+    isAdmin: boolean,
+    id: number
 }

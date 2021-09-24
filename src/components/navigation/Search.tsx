@@ -6,7 +6,8 @@ type SearchState = {
     nameSearch: string,
     APIgames: {
         name: string,
-        description: string
+        id: string
+        // description: string
     }[]
 }
 
@@ -26,7 +27,8 @@ class Search extends React.Component<SearchProps,SearchState> {
           nameSearch: "",
           APIgames: [{
               name: "",
-              description: ""
+              id: ""
+              // description: ""
           }]
         }
         this.searchFunction = this.searchFunction.bind(this)
@@ -37,19 +39,16 @@ class Search extends React.Component<SearchProps,SearchState> {
         this.setState({ nameSearch: value })
       }
     
-    //   displayResults() {
-    //     console.log(this.state.APIgames);
-    //   }
     
       render() {
+        // console.log(this.state.APIgames)
         return (
           <div>
-            <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value)} />
-            {/* //.replace(/\s/g, '+') */}
+            <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
             <Button onClick={() => this.APIfetch()}>Submit</Button>
             <h3>Results:</h3>
-            {this.state.APIgames.map((game, index) =>
-            {return( <ul>
+            {this.state.APIgames.map((game) =>
+            {return( <ul key={game.id}>
                 <li>{game.name}</li>
             </ul>)
             }

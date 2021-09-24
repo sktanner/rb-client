@@ -29,11 +29,11 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
     }
 
     gameMapper(): JSX.Element[] {
-        return this.props.games.map((game: game, index: number) => {
+        return this.props.games.map((game: game) => {
             // console.log(this.props.games);
             
             return (
-                <tr key={index}>
+                <tr key={game.id}>
                     <th scope="row">{game.id}</th>
                     <td>{game.title}</td>
                     <td>{game.description}</td>
@@ -46,7 +46,6 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                         </Button>
                         <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
                         <Button onClick={() => {this.props.setSelectedGame(game)}}>Leave a note!</Button>
-                        {/* ; this.props.fetchNotes() */}
                     </td>
                 </tr>
             )
