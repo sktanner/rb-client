@@ -5,6 +5,7 @@ import Login from "./Login"
 
 type AuthProps = {
     updateToken: (newToken: string) => void
+    updateIsAdmin: (setAdmin: string) => void 
 }
 
 type AuthState = {
@@ -37,12 +38,14 @@ class Auth extends React.Component<AuthProps, AuthState> {
                         ? <Register
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
+                            updateIsAdmin={this.props.updateIsAdmin}
                         />
                         // </Col>
                         // <Col md="6" className="login-col">
                         : <Login
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
+                            updateIsAdmin={this.props.updateIsAdmin}
                         />
                         // </Col>
                     }

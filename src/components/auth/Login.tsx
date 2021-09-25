@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, Button, Badge, Col } from 'reactstrap'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
+    updateIsAdmin: (setAdmin: string) => void
     togglePortal: () => void
 }
 
@@ -33,6 +34,7 @@ class Login extends React.Component<LoginProps, LoginState> {
         })
         let json = await res.json()
         this.props.updateToken(json.sessionToken)
+        this.props.updateIsAdmin(json.user.isAdmin)
         console.log(json);
     }
 

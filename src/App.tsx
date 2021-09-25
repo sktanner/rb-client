@@ -3,13 +3,20 @@ import React, { ChangeEvent } from 'react'
 import NavBar from './components/navigation/Navbar'
 import Auth from './components/auth/Auth'
 import GameIndex from './components/game/GameIndex'
-import { user } from './types'
+// import { user } from './types'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 type AppProps = {}
 
 type AppState = {
   token: string,
-  users: user[]
+  isAdmin: string
+  // users: user[]
   // email: string,
   // password: string
 }
@@ -19,7 +26,8 @@ class App extends React.Component<AppProps, AppState> {
     super(props)
     this.state={
       token:"",
-      users: []
+      isAdmin: ""
+      // users: []
       // email: "",
       // password: ""
     }
@@ -31,12 +39,23 @@ class App extends React.Component<AppProps, AppState> {
         token: localStorage.getItem('token')! //nonnull assertion expression operator
       })
     }
+    if(localStorage.getItem('isAdmin')) {
+      this.setState({
+        isAdmin: localStorage.getItem('isAdmin')!
+      })
+    }
   }
 
   updateToken = (newToken: string): void => {
     localStorage.setItem('token', newToken)
     this.setState({token: newToken})
     console.log(this.state.token)
+  }
+
+  updateIsAdmin = (setAdmin: string): void => {
+    localStorage.setItem('isAdmin', setAdmin)
+    this.setState({isAdmin: setAdmin})
+    console.log(this.state.isAdmin)
   }
 
   clearToken = (): void => {
@@ -48,15 +67,17 @@ class App extends React.Component<AppProps, AppState> {
     return (
       this.state.token === localStorage.getItem('token') 
       ? <GameIndex token={this.state.token} />
-    : <Auth updateToken={this.updateToken}/>)
+    : <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin}/>)
   }
 
   render(){
   return (
+    <Router>
     <div className="App">
-      <NavBar token={this.state.token} users={this.state.users}/>
+      <NavBar token={this.state.token} isAdmin={this.state.isAdmin}/>
       {this.protectedViews()}
     </div>
+    </Router>
   )
 }
 }

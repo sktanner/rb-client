@@ -1,30 +1,36 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Button, NavLink } from 'reactstrap';
 import Admin from '../admin/Admin';
-import { user } from '../../types'
+// import { user } from '../../types'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 type NavBarProps = {
-  users: user[],
-  token: string,
+  isAdmin: string,
+  token: string
 }
 
 type NavBarState = {
   user: {
     email: string,
     password: string,
-    isAdmin: boolean
+    isAdmin: string
   }
 }
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
-  constructor(props: NavBarProps){
+  constructor(props: NavBarProps) {
     super(props)
-    this.state={
+    this.state = {
       user: {
         email: "",
         password: "",
-        isAdmin: false
+        isAdmin: ""
       }
     }
   }
@@ -32,36 +38,38 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
   logout = (): void => {
     localStorage.clear()
     window.location.href = "/login"
-}
+  }
 
-// userMapper = (): React.Component => {
-//   // if (this.state.user.isAdmin == true) && {
-//   // return (this.props.users.map((user: user) => {            
-      
-//     return (
-//           <>
-//           <Admin token={this.props.token} users={this.props.users}/>
-//           </>
-//       )
-//   // })
-// }
+  // userMapper = (): React.Component => {
+  //   // if (this.state.user.isAdmin == true) && {
+  //   // return (this.props.users.map((user: user) => {            
+
+  //     return (
+  //           <>
+  //           <Admin token={this.props.token} users={this.props.users}/>
+  //           </>
+  //       )
+  //   // })
+  // }
 
 
   render() {
-    console.log(this.state.user);
-    
+    console.log(this.state.user.isAdmin);
+
     return (
       <div>
         <Navbar color="light">
           <NavbarBrand>Board Game Collection</NavbarBrand>
-          {/* if user.isAdmin = true, then show admin button */}
-          {this.props.token && this.state.user.isAdmin == true ? <Admin token={this.props.token} users={this.props.users}/> : <></>}
-
-          {/* <Button onClick={this.userMapper}>Admin</Button>  : <></>}
-
-{this.state.updateActive && this.state.gameToUpdate ? <GameEdit gameToUpdate={this.state.gameToUpdate} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} /> : <></>} */}
-
-            <Button onClick={this.logout}>Logout</Button>
+          {this.props.isAdmin == "true" && 
+            <Router>
+            <Link to="/admin">Admin</Link>
+            <Switch>
+            <Route path="/admin">
+            <Admin token={this.props.token}/>
+            </Route>
+            </Switch>
+            </Router>}
+          <Button onClick={this.logout}>Logout</Button>
         </Navbar>
       </div>
     )

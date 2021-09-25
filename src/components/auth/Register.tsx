@@ -4,6 +4,7 @@ import { user } from '../../types'
 
 type RegProps = {
     updateToken: (newToken: string) => void
+    updateIsAdmin: (setAdmin: string) => void
     togglePortal: () => void
 }
 
@@ -35,6 +36,7 @@ class Register extends React.Component<RegProps, RegState> {
         })
         let json = await res.json()
         this.props.updateToken(json.sessionToken)
+        this.props.updateIsAdmin(json.user.isAdmin)
     }
 
     render() {
