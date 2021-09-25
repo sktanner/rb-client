@@ -85,16 +85,18 @@ class App extends React.Component<AppProps, AppState> {
             {this.state.token === localStorage.getItem('token') &&
               <Button onClick={this.clearToken}>Logout</Button>}
           </Navbar>
+
           {this.state.token === '' &&
             <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />}
+            
           <Switch>
-            <Route exact path="/admin">
-              {this.state.isAdmin === "true" &&
-                <Admin token={this.state.token} isAdmin={this.state.isAdmin} />}
-            </Route>
             <Route path="/gameindex">
               {this.state.token === localStorage.getItem('token') &&
                 <GameIndex token={this.state.token} />}
+            </Route>
+            <Route exact path="/admin">
+              {this.state.isAdmin === "true" &&
+                <Admin token={this.state.token} isAdmin={this.state.isAdmin} />}
             </Route>
           </Switch>
           {/* {this.protectedViews()} */}

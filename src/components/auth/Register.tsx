@@ -41,9 +41,9 @@ class Register extends React.Component<RegProps, RegState> {
 
     render() {
         return (
-            <Container>
+            <div className="authForm">
                 <h1>Register</h1>
-                <Form className="authForm" onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                         <FormGroup row>
                             <Label sm={3} htmlFor="email">Email:</Label>
                             <Col sm={8}>
@@ -62,7 +62,7 @@ class Register extends React.Component<RegProps, RegState> {
                     <br />
                     <Badge href="#" color="light" onClick={this.props.togglePortal}>Already have an account?</Badge>
                 </Form>
-            </Container>
+            </div>
         )
     }
 

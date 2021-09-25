@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, Button, Badge, Col } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Button, Badge, Col, Container } from 'reactstrap'
 // import { user } from '../../types'
 
 type LoginProps = {
@@ -40,9 +40,10 @@ class Login extends React.Component<LoginProps, LoginState> {
 
     render(){
     return(
-        <div>
+        <div className="authBackground">
+        <div className="authForm">
             <h1>Login</h1>
-            <Form className="authForm" onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label sm={3} htmlFor="email">Email:</Label>
                     <Col sm={8}>
@@ -61,6 +62,7 @@ class Login extends React.Component<LoginProps, LoginState> {
                 <br />
                 <Badge href="#" color="light" onClick={this.props.togglePortal}>Don't have an account?</Badge>
             </Form>
+        </div>
         </div>
     )}
 
