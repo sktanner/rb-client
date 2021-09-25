@@ -44,8 +44,6 @@ class Admin extends React.Component<AdminProps, AdminState> {
     }
 
     userMapper(): JSX.Element[] {
-        
-        
         return this.state.users.map((user: user) => {
             return (
                 <tr key={user.id}>

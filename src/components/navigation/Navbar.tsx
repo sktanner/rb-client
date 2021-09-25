@@ -1,7 +1,6 @@
 import React from 'react';
-import { Navbar, NavbarBrand, Button, NavLink } from 'reactstrap';
+import { Navbar, NavbarBrand, Button } from 'reactstrap';
 import Admin from '../admin/Admin';
-// import { user } from '../../types'
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,61 +15,36 @@ type NavBarProps = {
 }
 
 type NavBarState = {
-  user: {
-    email: string,
-    password: string,
-    isAdmin: string
-  }
 }
 
 class NavBar extends React.Component<NavBarProps, NavBarState> {
-  constructor(props: NavBarProps) {
-    super(props)
-    this.state = {
-      user: {
-        email: "",
-        password: "",
-        isAdmin: ""
-      }
-    }
-  }
+  // constructor(props: NavBarProps) {
+  //   super(props)
+  //   this.state = {
+  //   }
+  // }
 
   logout = (): void => {
     localStorage.clear()
     window.location.href = "/login"
   }
 
-  // userMapper = (): React.Component => {
-  //   // if (this.state.user.isAdmin == true) && {
-  //   // return (this.props.users.map((user: user) => {            
-
-  //     return (
-  //           <>
-  //           <Admin token={this.props.token} users={this.props.users}/>
-  //           </>
-  //       )
-  //   // })
-  // }
-
-
   render() {
-    console.log(this.state.user.isAdmin);
+    // console.log(this.props.isAdmin);
 
     return (
       <div>
         <Navbar color="light">
           <NavbarBrand>Board Game Collection</NavbarBrand>
-          {this.props.isAdmin == "true" && 
-            <Router>
-            <Link to="/admin">Admin</Link>
-            <Switch>
-            <Route path="/admin">
-            <Admin token={this.props.token}/>
-            </Route>
-            </Switch>
-            </Router>}
+          {this.props.isAdmin == "true" &&
+            <Link to="/admin">Admin</Link>}
           <Button onClick={this.logout}>Logout</Button>
         </Navbar>
+        <Switch>
+          <Route exact path="/admin">
+            <Admin token={this.props.token} />
+          </Route>
+        </Switch>
       </div>
     )
   }

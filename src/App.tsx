@@ -1,9 +1,8 @@
 import './App.css'
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import NavBar from './components/navigation/Navbar'
 import Auth from './components/auth/Auth'
 import GameIndex from './components/game/GameIndex'
-// import { user } from './types'
 import {
   BrowserRouter as Router,
   Switch,
