@@ -4,6 +4,7 @@ import { user } from '../../types'
 
 type AdminProps = {
     token: string,
+    isAdmin: string
 }
 
 type AdminState = {
@@ -50,7 +51,9 @@ class Admin extends React.Component<AdminProps, AdminState> {
                     <th scope="row">{user.id}</th>
                     <td>{user.email}</td>
                     <td>{user.isAdmin}</td>
+                    <td>
                     <Button color="danger" onClick={() => { this.deleteUser(user) }}>Delete</Button>
+                    </td>
                 </tr>
             )
         })
@@ -58,6 +61,8 @@ class Admin extends React.Component<AdminProps, AdminState> {
 
     componentDidMount(): void {
         this.fetchUsers()
+        console.log('fetching users');
+        
     }
 
     render() {
@@ -71,6 +76,7 @@ class Admin extends React.Component<AdminProps, AdminState> {
                             <th>Id</th>
                             <th>Email</th>
                             <th>Is Admin</th>
+                            <th>Delete User</th>
                         </tr>
                     </thead>
                     <tbody>

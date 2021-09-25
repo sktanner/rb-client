@@ -10,7 +10,7 @@ type GameDisplayProps = {
     // fetchNotes: () => Promise<void>
     updateOn: () => void
     editUpdateGame: (games: game) => void
-    setSelectedGame: (g:game) => void
+    setSelectedGame: (g: game) => void
 }
 
 type GameDisplayState = {}
@@ -31,10 +31,10 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
     gameMapper(): JSX.Element[] {
         return this.props.games.map((game: game) => {
             // console.log(this.props.games);
-            
+
             return (
                 <tr key={game.id}>
-                    <th scope="row">{game.id}</th>
+                    {/* <th scope="row">{game.id}</th> */}
                     <td>{game.title}</td>
                     <td>{game.description}</td>
                     <td>{game.categories}</td>
@@ -44,8 +44,12 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                             this.props.updateOn()
                         }}>Update
                         </Button>
+                    </td>
+                    <td>
                         <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
-                        <Button onClick={() => {this.props.setSelectedGame(game)}}>Leave a note!</Button>
+                    </td>
+                    <td>
+                        <Button onClick={() => { this.props.setSelectedGame(game) }}>Leave a note!</Button>
                     </td>
                 </tr>
             )
@@ -60,10 +64,13 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                 <Table striped>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            {/* <th>Id</th> */}
                             <th>Title</th>
                             <th>Description</th>
                             <th>Categories</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
