@@ -76,19 +76,19 @@ class App extends React.Component<AppProps, AppState> {
       <Router>
         <div className="App">
           {/* <NavBar token={this.state.token} isAdmin={this.state.isAdmin}/> */}
-          <Navbar color="light">
-            <NavbarBrand>Board Game Collection</NavbarBrand>
+          <Navbar>
+            <NavbarBrand className="link">Game Room</NavbarBrand>
             {this.state.isAdmin === "true" &&
-              <Link to="/admin">Admin</Link>}
+              <Link to="/admin" className="link">Admin</Link>}
             {this.state.isAdmin === "true" &&
-              <Link to="/gameindex">Home</Link>}
+              <Link to="/gameindex" className="link">Home</Link>}
             {this.state.token === localStorage.getItem('token') &&
-              <Button onClick={this.clearToken}>Logout</Button>}
+              <Button  color="warning" onClick={this.clearToken}>Logout</Button>}
           </Navbar>
 
           {this.state.token === '' &&
             <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />}
-            
+
           <Switch>
             <Route path="/gameindex">
               {this.state.token === localStorage.getItem('token') &&

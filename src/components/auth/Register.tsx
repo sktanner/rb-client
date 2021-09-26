@@ -1,6 +1,6 @@
 import React from "react"
 import { Form, FormGroup, Label, Input, Button, Badge, Container, Col } from 'reactstrap'
-import { user } from '../../types'
+import { Link } from 'react-router-dom'
 
 type RegProps = {
     updateToken: (newToken: string) => void
@@ -41,7 +41,8 @@ class Register extends React.Component<RegProps, RegState> {
 
     render() {
         return (
-            <div className="authForm">
+            <Container fluid="sm">
+                <div className="authForm">
                 <h1>Register</h1>
                 <Form onSubmit={this.handleSubmit}>
                         <FormGroup row>
@@ -58,11 +59,12 @@ class Register extends React.Component<RegProps, RegState> {
                         </Col>
                     </FormGroup>
                     <br />
-                    <Button type="submit">Sign Up</Button>
+                    <Button type="submit" color="warning">Sign Up</Button>
                     <br />
-                    <Badge href="#" color="light" onClick={this.props.togglePortal}>Already have an account?</Badge>
+                    <Link to="" className="authLink" onClick={this.props.togglePortal}>Already have an account?</Link>
                 </Form>
-            </div>
+                </div>
+            </Container>
         )
     }
 

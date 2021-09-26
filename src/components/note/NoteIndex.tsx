@@ -96,6 +96,8 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
                             this.editUpdateNote(note)
                             this.updateOn() }}>
                             Update</Button>
+                            </td>
+                            <td>
                         <Button color="danger"
                             onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>

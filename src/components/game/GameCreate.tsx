@@ -69,7 +69,7 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
                     {/* <FormGroup>
                     <Label htmlFor="image"/>
                 </FormGroup> */}
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" color="warning">Submit</Button>
                 </Form>
             </div>
         )

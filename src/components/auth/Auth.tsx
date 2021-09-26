@@ -31,7 +31,7 @@ class Auth extends React.Component<AuthProps, AuthState> {
 
     render() {
         return (
-            <Container className="auth-container">
+            <Container fluid="sm" className="authContainer">
                 <Row>
                     {this.state.showLogin
                         // <Col md="6">

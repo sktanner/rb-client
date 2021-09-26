@@ -45,7 +45,7 @@ class Search extends React.Component<SearchProps,SearchState> {
         return (
           <div>
             <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
-            <Button onClick={() => this.APIfetch()}>Submit</Button>
+            <Button  color="warning" onClick={() => this.APIfetch()}>Submit</Button>
             <h3>Results:</h3>
             {this.state.APIgames.map((game) =>
             {return( <ul key={game.id}>

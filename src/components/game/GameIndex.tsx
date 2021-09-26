@@ -87,7 +87,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         return (
             <Container>
                 <Row>
-                    <Search />
+                    {/* <Search /> */}
                 </Row>
                 <Row>
                     <Col md="3">

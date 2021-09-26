@@ -69,7 +69,7 @@ class Admin extends React.Component<AdminProps, AdminState> {
         return (
             <>
                 <h3>Users</h3>
-                <hr />
+                <br />
                 <Table striped>
                     <thead>
                         <tr>

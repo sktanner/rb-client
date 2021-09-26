@@ -52,7 +52,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
                         <Label htmlFor="content" />
                         <Input name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
                     </FormGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button color="warning" type="submit">Submit</Button>
                 </Form>
             </div>
         )

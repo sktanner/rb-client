@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, Button, Badge, Col, Container } from 'reactstrap'
-// import { user } from '../../types'
+import { Link } from 'react-router-dom'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
@@ -40,7 +40,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 
     render(){
     return(
-        <div className="authBackground">
+        <Container fluid="sm">
         <div className="authForm">
             <h1>Login</h1>
             <Form onSubmit={this.handleSubmit}>
@@ -58,12 +58,12 @@ class Login extends React.Component<LoginProps, LoginState> {
                     </Col>
                 </FormGroup>
                 <br />
-                <Button type="submit">Login</Button>
+                <Button type="submit"  color="warning">Login</Button>
                 <br />
-                <Badge href="#" color="light" onClick={this.props.togglePortal}>Don't have an account?</Badge>
+                <Link to="" className="authLink" onClick={this.props.togglePortal}>Don't have an account?</Link>
             </Form>
         </div>
-        </div>
+        </Container>
     )}
 
 }

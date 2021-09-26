@@ -49,7 +49,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                         <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
                     </td>
                     <td>
-                        <Button onClick={() => { this.props.setSelectedGame(game) }}>Leave a note!</Button>
+                        <Button color="success" onClick={() => { this.props.setSelectedGame(game) }}>Leave a note!</Button>
                     </td>
                 </tr>
             )
@@ -60,7 +60,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
         return (
             <>
                 <h3>Games</h3>
-                <hr />
+                <br />
                 <Table striped>
                     <thead>
                         <tr>
