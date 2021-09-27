@@ -2,6 +2,7 @@ import './App.css'
 import React from 'react'
 import Auth from './components/auth/Auth'
 import GameIndex from './components/game/GameIndex'
+import CollectionsIndex from './components/collections/CollectionsIndex'
 import Admin from './components/admin/Admin';
 import { Navbar, NavbarBrand, Button } from 'reactstrap';
 import {
@@ -79,6 +80,8 @@ class App extends React.Component<AppProps, AppState> {
               <Link to="/admin" className="link">Admin</Link>}
             {this.state.isAdmin === "true" &&
               <Link to="/gameindex" className="link">Home</Link>}
+              {this.state.isAdmin === "true" &&
+              <Link to="/collections" className="link">Collections</Link>}
 
             <Link to='/'>
               <Button color="warning" onClick={this.clearToken}>Logout</Button>
@@ -92,6 +95,9 @@ class App extends React.Component<AppProps, AppState> {
           </Route>
           <Route path="/gameindex">
             <GameIndex token={this.state.token} />
+          </Route>
+          <Route path="/collections">
+            <CollectionsIndex token={this.state.token} />
           </Route>
           <Route exact path="/admin">
             {this.adminViews}

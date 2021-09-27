@@ -4,35 +4,30 @@ import { game } from '../../types'
 
 type GameEditProps = {
     token: string,
-    gameToUpdate: game
+    gameToReview: game
     fetchGames: () => Promise<void>
     updateOff: () => void
 }
 
-type GameEditState = {
-    // editTitle: string,
-    // editDescription: string,
-    // editCategories: string,
-}
+// type GameEditState = {}
 
 class GameEdit extends React.Component<GameEditProps, game> {
     constructor(props: GameEditProps) {
         super(props)
         this.state = {
-            title: this.props.gameToUpdate.title,
-            description: this.props.gameToUpdate.description,
-            categories: this.props.gameToUpdate.categories,
-            id: this.props.gameToUpdate.id,
-            collection: this.props.gameToUpdate.collection
+            title: this.props.gameToReview.title,
+            description: this.props.gameToReview.description,
+            categories: this.props.gameToReview.categories,
+            id: this.props.gameToReview.id,
+            collection: this.props.gameToReview.collection
         }
         this.gameUpdate = this.gameUpdate.bind(this)
     }
 
     async gameUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
-        // console.info(this.props.gameToUpdate.id);
         try {
-            let res = await fetch(`http://localhost:3000/game/${this.props.gameToUpdate.id}`, {
+            let res = await fetch(`http://localhost:3000/game/${this.props.gameToReview.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories, collection: this.state.collection }),
                 headers: new Headers({
@@ -77,9 +72,9 @@ class GameEdit extends React.Component<GameEditProps, game> {
                             <Label htmlFor="collection">Edit Collection:</Label>
                             <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
                                 <option></option>
-                                <option value="WantToPlay">Want to play</option>
+                                <option value="Want to play">Want to play</option>
                                 <option value="Played">Played</option>
-                                <option value="WantToBuy">Want to buy</option>
+                                <option value="Want to buy">Want to buy</option>
                                 <option value="Owned">Owned</option>
                             </Input>
                         </FormGroup>

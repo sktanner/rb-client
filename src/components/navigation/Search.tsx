@@ -42,7 +42,6 @@ class Search extends React.Component<SearchProps, SearchState> {
 
 
   render() {
-    // console.log(this.state.APIgames)
     return (
       <div>
         <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
@@ -56,7 +55,6 @@ class Search extends React.Component<SearchProps, SearchState> {
                 <li>
                   {game.name}</li>
               </ul>)
-
         }
         )}
       </div>

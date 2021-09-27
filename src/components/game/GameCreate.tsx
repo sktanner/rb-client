@@ -70,9 +70,9 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
                         <Label htmlFor="collection" />
                         <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
                             <option></option>
-                            <option value="WantToPlay">Want to play</option>
+                            <option value="Want to play">Want to play</option>
                             <option value="Played">Played</option>
-                            <option value="WantToBuy">Want to buy</option>
+                            <option value="Want to buy">Want to buy</option>
                             <option value="Owned">Owned</option>
                         </Input>
                     </FormGroup>
