@@ -22,7 +22,8 @@ class GameEdit extends React.Component<GameEditProps, game> {
             title: this.props.gameToUpdate.title,
             description: this.props.gameToUpdate.description,
             categories: this.props.gameToUpdate.categories,
-            id: this.props.gameToUpdate.id
+            id: this.props.gameToUpdate.id,
+            collection: this.props.gameToUpdate.collection
         }
         this.gameUpdate = this.gameUpdate.bind(this)
     }
@@ -33,7 +34,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
         try {
             let res = await fetch(`http://localhost:3000/game/${this.props.gameToUpdate.id}`, {
                 method: 'PUT',
-                body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories }),
+                body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories, collection: this.state.collection }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.props.token}`
@@ -70,6 +71,16 @@ class GameEdit extends React.Component<GameEditProps, game> {
                                 <option value="Co-op">Co-op</option>
                                 <option value="Strategy">Strategy</option>
                                 <option value="Euro">Euro</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="collection">Edit Collection:</Label>
+                            <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
+                                <option></option>
+                                <option value="WantToPlay">Want to play</option>
+                                <option value="Played">Played</option>
+                                <option value="WantToBuy">Want to buy</option>
+                                <option value="Owned">Owned</option>
                             </Input>
                         </FormGroup>
                         <Button type="submit">Update the Game!</Button>

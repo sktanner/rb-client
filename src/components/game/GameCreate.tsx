@@ -10,10 +10,7 @@ type GameCreateState = {
     title: string,
     description: string,
     categories: string,
-    wantToPlay: boolean,
-    played: boolean,
-    wantToBuy: boolean,
-    owned: boolean
+    collection: string
     // image: string
 }
 
@@ -24,10 +21,7 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
             title: "",
             description: "",
             categories: "",
-            wantToPlay: false,
-            played: false,
-            wantToBuy: false,
-            owned: false
+            collection: ""
             // image: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -38,14 +32,14 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
         // console.log("working");
         let res = await fetch('http://localhost:3000/game/create', {
             method: 'POST',
-            body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories }),
+            body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories, collection: this.state.collection }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.props.token}`
             })
         })
         let json = await res.json()
-        this.setState({ title: "", description: "", categories: "" })
+        this.setState({ title: "", description: "", categories: "", collection: "" })
         this.props.fetchGames()
         // console.info(json)
     }
@@ -70,6 +64,16 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
                             <option value="Co-op">Co-op</option>
                             <option value="Strategy">Strategy</option>
                             <option value="Euro">Euro</option>
+                        </Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="collection" />
+                        <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
+                            <option></option>
+                            <option value="WantToPlay">Want to play</option>
+                            <option value="Played">Played</option>
+                            <option value="WantToBuy">Want to buy</option>
+                            <option value="Owned">Owned</option>
                         </Input>
                     </FormGroup>
                     {/* <FormGroup>

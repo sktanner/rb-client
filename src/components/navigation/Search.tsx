@@ -3,59 +3,65 @@ import { Button, Input } from 'reactstrap';
 
 type SearchProps = {}
 type SearchState = {
-    nameSearch: string,
-    APIgames: {
-        name: string,
-        id: string
-        // description: string
-    }[]
+  nameSearch: string,
+  APIgames: {
+    name: string,
+    id: string,
+    thumb_url: string
+    // description: string
+  }[]
 }
 
-class Search extends React.Component<SearchProps,SearchState> {
+class Search extends React.Component<SearchProps, SearchState> {
 
-    async APIfetch(): Promise<void> {
-        let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
-        let json = await res.json()
+  async APIfetch(): Promise<void> {
+    let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
+    let json = await res.json()
 
-        console.log(json);
-        this.setState({ APIgames: json.games })
+    console.log(json);
+    this.setState({ APIgames: json.games })
+  }
+
+  constructor(props: SearchProps) {
+    super(props)
+    this.state = {
+      nameSearch: "",
+      APIgames: [{
+        name: "",
+        id: "",
+        thumb_url: ""
+        // description: ""
+      }]
     }
+    this.searchFunction = this.searchFunction.bind(this)
+  }
 
-    constructor(props: SearchProps) {
-        super(props)
-        this.state = {
-          nameSearch: "",
-          APIgames: [{
-              name: "",
-              id: ""
-              // description: ""
-          }]
+  searchFunction(value: string) {
+    this.setState({ nameSearch: value })
+  }
+
+
+  render() {
+    // console.log(this.state.APIgames)
+    return (
+      <div>
+        <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
+        <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
+        <h3>Results:</h3>
+
+        {this.state.APIgames.map((game) => {
+          return (
+              <ul key={game.id}>
+                <img src={game.thumb_url} className="thumb" />
+                <li>
+                  {game.name}</li>
+              </ul>)
+
         }
-        this.searchFunction = this.searchFunction.bind(this)
-      }
-    
-      searchFunction(value: string) {
-        // let result = this.state.things.filter(thing => thing.includes(value.toLowerCase()))
-        this.setState({ nameSearch: value })
-      }
-    
-    
-      render() {
-        // console.log(this.state.APIgames)
-        return (
-          <div>
-            <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
-            <Button  color="warning" onClick={() => this.APIfetch()}>Submit</Button>
-            <h3>Results:</h3>
-            {this.state.APIgames.map((game) =>
-            {return( <ul key={game.id}>
-                <li>{game.name}</li>
-            </ul>)
-            }
         )}
-          </div>
-        )
-      }
-    }
+      </div>
+    )
+  }
+}
 
 export default Search

@@ -38,6 +38,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                     <td>{game.title}</td>
                     <td>{game.description}</td>
                     <td>{game.categories}</td>
+                    <td>{game.collection}</td>
                     <td>
                         <Button color="warning" onClick={() => {
                             this.props.editUpdateGame(game)
@@ -68,6 +69,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                             <th>Title</th>
                             <th>Description</th>
                             <th>Categories</th>
+                            <th>Collection</th>
                             <th></th>
                             <th></th>
                             <th></th>

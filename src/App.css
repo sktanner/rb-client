@@ -48,3 +48,7 @@ color: white;
 .navbar {
   padding: 1rem;
 }
+
+.thumb {
+  max-height: 100px;
+}
