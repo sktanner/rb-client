@@ -1,6 +1,5 @@
 import './App.css'
 import React from 'react'
-// import NavBar from './components/navigation/Navbar'
 import Auth from './components/auth/Auth'
 import GameIndex from './components/game/GameIndex'
 import Admin from './components/admin/Admin';
@@ -17,9 +16,6 @@ type AppProps = {}
 type AppState = {
   token: string,
   isAdmin: string
-  // users: user[]
-  // email: string,
-  // password: string
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -28,9 +24,6 @@ class App extends React.Component<AppProps, AppState> {
     this.state = {
       token: "",
       isAdmin: ""
-      // users: []
-      // email: "",
-      // password: ""
     }
   }
 
@@ -50,60 +43,96 @@ class App extends React.Component<AppProps, AppState> {
   updateToken = (newToken: string): void => {
     localStorage.setItem('token', newToken)
     this.setState({ token: newToken })
-    console.log(this.state.token)
+    // console.log(this.state.token)
   }
 
   updateIsAdmin = (setAdmin: string): void => {
     localStorage.setItem('isAdmin', setAdmin)
     this.setState({ isAdmin: setAdmin })
-    console.log(this.state.isAdmin)
+    // console.log(this.state.isAdmin)
   }
 
-  clearToken = (): void => {
+  clearToken = () => {
     localStorage.clear()
     this.setState({ token: '', isAdmin: '' })
   }
 
-  // protectedViews = (): JSX.Element => {
-  //   return (
-  //     this.state.token === localStorage.getItem('token')
-  //       ? <GameIndex token={this.state.token} />
-  //       : <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />)
-  // }
+  protectedViews = () => {
+    return this.state.token === localStorage.getItem('token') ?
+      (<GameIndex token={this.state.token} />)
+      : (<Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />)
+  }
+
+  adminViews = () => {
+    return localStorage.getItem('isAdmin') === 'true' ?
+      (<Admin token={this.state.token} isAdmin={this.state.isAdmin} />)
+      : (<GameIndex token={this.state.token} />)
+  }
 
   render() {
     return (
-      <Router>
-        <div className="App">
-          {/* <NavBar token={this.state.token} isAdmin={this.state.isAdmin}/> */}
+      <div className="App">
+        {this.state.token && (
           <Navbar>
             <NavbarBrand className="link">Game Room</NavbarBrand>
             {this.state.isAdmin === "true" &&
               <Link to="/admin" className="link">Admin</Link>}
             {this.state.isAdmin === "true" &&
               <Link to="/gameindex" className="link">Home</Link>}
-            {this.state.token === localStorage.getItem('token') &&
-              <Button  color="warning" onClick={this.clearToken}>Logout</Button>}
+
+            <Link to='/'>
+              <Button color="warning" onClick={this.clearToken}>Logout</Button>
+            </Link>
           </Navbar>
-
-          {this.state.token === '' &&
-            <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />}
-
-          <Switch>
-            <Route path="/gameindex">
-              {this.state.token === localStorage.getItem('token') &&
-                <GameIndex token={this.state.token} />}
-            </Route>
-            <Route exact path="/admin">
-              {this.state.isAdmin === "true" &&
-                <Admin token={this.state.token} isAdmin={this.state.isAdmin} />}
-            </Route>
-          </Switch>
-          {/* {this.protectedViews()} */}
-        </div>
-      </Router>
+        )}
+        
+        <Switch>
+          <Route exact path='/'>
+            {this.protectedViews}
+          </Route>
+          <Route path="/gameindex">
+            <GameIndex token={this.state.token} />
+          </Route>
+          <Route exact path="/admin">
+            {this.adminViews}
+          </Route>
+        </Switch>
+      </div>
     )
   }
+
+
+  // render() {
+  //   return (
+  //       <div className="App">
+  //         {/* <NavBar token={this.state.token} isAdmin={this.state.isAdmin}/> */}
+  //         <Navbar>
+  //           <NavbarBrand className="link">Game Room</NavbarBrand>
+  //           {this.state.isAdmin === "true" &&
+  //             <Link to="/admin" className="link">Admin</Link>}
+  //           {this.state.isAdmin === "true" &&
+  //             <Link to="/gameindex" className="link">Home</Link>}
+  //           {this.state.token === localStorage.getItem('token') &&
+  //             <Button  color="warning" onClick={this.clearToken}>Logout</Button>}
+  //         </Navbar>
+
+  //         {this.state.token === '' &&
+  //           <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />}
+
+  //         <Switch>
+  //           <Route path="/gameindex">
+  //             {this.state.token === localStorage.getItem('token') &&
+  //               <GameIndex token={this.state.token} />}
+  //           </Route>
+  //           <Route exact path="/admin">
+  //             {this.state.isAdmin === "true" &&
+  //               <Admin token={this.state.token} isAdmin={this.state.isAdmin} />}
+  //           </Route>
+  //         </Switch>
+  //         {/* {this.protectedViews()} */}
+  //       </div>
+  //   )
+  // }
 }
 
 export default App

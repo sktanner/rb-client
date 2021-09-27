@@ -10,8 +10,11 @@ type GameCreateState = {
     title: string,
     description: string,
     categories: string,
-    image: string,
-    // id: number
+    wantToPlay: boolean,
+    played: boolean,
+    wantToBuy: boolean,
+    owned: boolean
+    // image: string
 }
 
 class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
@@ -21,8 +24,11 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
             title: "",
             description: "",
             categories: "",
-            image: "",
-            // id: 0
+            wantToPlay: false,
+            played: false,
+            wantToBuy: false,
+            owned: false
+            // image: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -30,7 +36,7 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
     async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         // console.log("working");
-                let res = await fetch('http://localhost:3000/game/create', {
+        let res = await fetch('http://localhost:3000/game/create', {
             method: 'POST',
             body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories }),
             headers: new Headers({
