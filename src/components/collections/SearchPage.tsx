@@ -17,7 +17,8 @@ type CollectionsState = {
     nameSearch: string,
     name: string,
     description: string,
-    thumb_url: string
+    thumb_url: string,
+    modal: boolean
 }
 
 class CollectionsIndex extends React.Component<CollectionsProps, CollectionsState> {
@@ -31,7 +32,8 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             nameSearch: "",
             name: "",
             description: "",
-            thumb_url: ""
+            thumb_url: "",
+            modal: false
         }
         this.searchFunction = this.searchFunction.bind(this)
         this.createGame = this.createGame.bind(this)
@@ -99,6 +101,10 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         })
     }
 
+    toggle = (): void => {
+        this.setState({ modal: !this.state.modal })
+    }
+
     // setGameToReview = (gr: game) => this.setState({ gameToReview: gr })
 
     componentDidMount(): void {
@@ -117,32 +123,40 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
 
         return (
             <>
-                <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
+            <br/>
+            <h3>Search for a Game!</h3>
+            <br/>
+            <Row>
+                <Col></Col>
+                <Col>
+                <Input className="searchBar" type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
+                </Col>
+                <Col>
                 <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
-                <h3>Results:</h3>
+                </Col>
+                <Col></Col>
+                </Row>
+                <br />
+                
                 <div className="cardSpacing">
-                {this.state.games.map((game) => {
-                    return (
-                        <div className="cardDiv">
-                            <Card fluid="sm" className="card" key={game.id}>
-                                <CardBody>
-                                    <CardTitle tag="h5">{game.name}</CardTitle>
-                                    {/* {/* <CardImg src={game.thumb_url} /> */}
-                                {/* </CardBody> */}
-                                <img width='150px' max-height='200px' src={game.thumb_url} alt='Game logo' />
-                                {/* <CardText>{game.description}</CardText> */}
-                                {/* <CardBody> */}
-                                    {/* <Link to="#"></Link> */}
-                                    <Button onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    )
-                }
-                )}
+                    {this.state.games.map((game) => {
+                        return (
+                            <div className="cardDiv">
+                                <Card fluid="sm" key={game.id}>
+                                    <CardBody className="card">
+                                        <CardTitle className="cardTitle" tag="h5">{game.name}</CardTitle>
+                                        <img className="cardImg" src={game.thumb_url} alt='Game logo' />
+                                        <br />
+                                        <Button onClick={() => { this.setSelectedGame(game); this.toggle() }}>View Game</Button>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        )
+                    }
+                    )}
                 </div>
                 {this.state.selectedGame &&
-                    <GameInfo selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} createGame={this.createGame} />}
+                    <GameInfo selectedGame={this.state.selectedGame} modal={this.state.modal} updateOff={this.updateOff} toggle={this.toggle} token={this.props.token} fetchGames={this.fetchGames} createGame={this.createGame} />}
             </>
         )
     }

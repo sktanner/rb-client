@@ -69,9 +69,20 @@ color: white;
 }
 
 .card {
-  text-align: center;
-  width: 200px;
-  height: 300px;
+  /* text-align: center; */
+  align-items: center;
+  width: 300px;
+  height: 350px;
+}
+
+.cardTitle {
+  height: 50px;
+}
+
+.cardImg {
+  width:  200px;
+  height: 200px;
+  object-fit: fill;
 }
 
 .modalBody {
@@ -79,13 +90,6 @@ color: white;
   overflow-y: scroll;
 }
 
-/* .test.card {
-  margin: 20px;
-} */
-
-/* .test2 {
-  display: inline-block;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: row;
-} */
+.searchBar.form-control {
+  width: 400px;
+}
