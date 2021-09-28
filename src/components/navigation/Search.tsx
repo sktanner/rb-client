@@ -4,9 +4,9 @@ import { Button, Input } from 'reactstrap';
 type SearchProps = {}
 type SearchState = {
   nameSearch: string,
-  APIgames: {
+  games: {
     name: string,
-    id: string,
+    id: number,
     thumb_url: string
     // description: string
   }[]
@@ -19,16 +19,16 @@ class Search extends React.Component<SearchProps, SearchState> {
     let json = await res.json()
 
     console.log(json);
-    this.setState({ APIgames: json.games })
+    this.setState({ games: json.games })
   }
 
   constructor(props: SearchProps) {
     super(props)
     this.state = {
       nameSearch: "",
-      APIgames: [{
+      games: [{
         name: "",
-        id: "",
+        id: 0,
         thumb_url: ""
         // description: ""
       }]
@@ -48,7 +48,7 @@ class Search extends React.Component<SearchProps, SearchState> {
         <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
         <h3>Results:</h3>
 
-        {this.state.APIgames.map((game) => {
+        {this.state.games.map((game) => {
           return (
               <ul key={game.id}>
                 <img src={game.thumb_url} className="thumb" />

@@ -5,7 +5,7 @@ import { game, note } from '../../types'
 type OwnedProps = {
     token: string,
     games: game[]
-    setSelectedGame: (g: game) => void
+    // setSelectedGame: (g: game) => void
 }
 
 type OwnedState = {
@@ -24,7 +24,7 @@ class Owned extends React.Component<OwnedProps, OwnedState> {
             return (
                 game.collection === "owned" && (
                     <ul key={game.id}>
-                        <li>{game.title}</li>
+                        <li>{game.name}</li>
                     </ul>
 
                 )

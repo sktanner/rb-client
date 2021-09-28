@@ -15,11 +15,11 @@ class GameEdit extends React.Component<GameEditProps, game> {
     constructor(props: GameEditProps) {
         super(props)
         this.state = {
-            title: this.props.gameToReview.title,
+            name: this.props.gameToReview.name,
             description: this.props.gameToReview.description,
-            categories: this.props.gameToReview.categories,
             id: this.props.gameToReview.id,
-            collection: this.props.gameToReview.collection
+            collection: this.props.gameToReview.collection,
+            thumb_url: this.props.gameToReview.thumb_url
         }
         this.gameUpdate = this.gameUpdate.bind(this)
     }
@@ -29,7 +29,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
         try {
             let res = await fetch(`http://localhost:3000/game/${this.props.gameToReview.id}`, {
                 method: 'PUT',
-                body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories, collection: this.state.collection }),
+                body: JSON.stringify({ name: this.state.name, description: this.state.description, collection: this.state.collection }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.props.token}`
@@ -52,21 +52,12 @@ class GameEdit extends React.Component<GameEditProps, game> {
                 <ModalBody>
                     <Form onSubmit={this.gameUpdate}>
                         <FormGroup>
-                            <Label htmlFor="title">Edit Title:</Label>
-                            <Input name="title" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+                            <Label htmlFor="name">Edit Title:</Label>
+                            <Input name="name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="description">Edit Description:</Label>
                             <Input name="description" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="categories">Edit Categories:</Label>
-                            <Input type="select" name="categories" value={this.state.categories} onChange={(e) => this.setState({ categories: e.target.value })}>
-                                <option></option>
-                                <option value="Co-op">Co-op</option>
-                                <option value="Strategy">Strategy</option>
-                                <option value="Euro">Euro</option>
-                            </Input>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="collection">Edit Collection:</Label>

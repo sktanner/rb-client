@@ -7,9 +7,8 @@ type GameCreateProps = {
 }
 
 type GameCreateState = {
-    title: string,
+    name: string,
     description: string,
-    categories: string,
     collection: string
     // image: string
 }
@@ -18,9 +17,8 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
     constructor(props: GameCreateProps) {
         super(props)
         this.state = {
-            title: "",
+            name: "",
             description: "",
-            categories: "",
             collection: ""
             // image: ""
         }
@@ -32,14 +30,14 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
         // console.log("working");
         let res = await fetch('http://localhost:3000/game/create', {
             method: 'POST',
-            body: JSON.stringify({ title: this.state.title, description: this.state.description, categories: this.state.categories, collection: this.state.collection }),
+            body: JSON.stringify({ name: this.state.name, description: this.state.description, collection: this.state.collection }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.props.token}`
             })
         })
         let json = await res.json()
-        this.setState({ title: "", description: "", categories: "", collection: "" })
+        this.setState({ name: "", description: "", collection: "" })
         this.props.fetchGames()
         // console.info(json)
     }
@@ -50,21 +48,12 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
                 <h3>Create a Game</h3>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label htmlFor="title" />
-                        <Input name="title" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })} />
+                        <Label htmlFor="name" />
+                        <Input name="name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="description" />
                         <Input name="description" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="categories" />
-                        <Input type="select" name="categories" value={this.state.categories} onChange={(e) => this.setState({ categories: e.target.value })}>
-                            <option></option>
-                            <option value="Co-op">Co-op</option>
-                            <option value="Strategy">Strategy</option>
-                            <option value="Euro">Euro</option>
-                        </Input>
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="collection" />

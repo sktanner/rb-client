@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, Card, CardBody, CardTitle, CardText, CardImg, Row, Col } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, CardTitle, CardText, CardImg, Row, Col } from 'reactstrap'
 import { game, note } from '../../types'
 import NoteIndex from '../note/NoteIndex'
 
@@ -9,6 +9,7 @@ type GameInfoProps = {
     selectedGame: game
     updateOff: () => void
     fetchGames: () => Promise<void>
+    createGame: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
 // type GameInfoState = {
@@ -20,11 +21,11 @@ class GameInfo extends React.Component<GameInfoProps, game> {
         super(props)
         this.state = {
             // games: [],
-            title: this.props.gameToReview.title,
+            name: this.props.gameToReview.name,
             description: this.props.gameToReview.description,
-            categories: this.props.gameToReview.categories,
             id: this.props.gameToReview.id,
-            collection: this.props.gameToReview.collection
+            collection: this.props.gameToReview.collection,
+            thumb_url: this.props.gameToReview.thumb_url
         }
     }
 
@@ -49,41 +50,47 @@ class GameInfo extends React.Component<GameInfoProps, game> {
         }
     }
 
+    // toggle = () => {setModal(!modal)}
+
     render() {
         return (
-            <Modal isOpen={true}>
+            <div>
+            <Modal size="lg" isOpen={true}>
+            <ModalHeader>{this.props.gameToReview.name}</ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={this.gameUpdate}>
-                    <Row>
-                        <Col>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle tag="h5">Title</CardTitle>
-                                </CardBody>
-                                <CardImg bottom width="100%" src={this.props.gameToReview.image} />
-                            </Card>
-                        </Col>
-                        <Col>
-                            {this.props.gameToReview.description}
-                        </Col>
-                        <Col>
-                        <Label htmlFor="collection">Add To</Label>
-                        <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
-                            <option></option>
-                            <option value="Want to play">Want to play</option>
-                            <option value="Played">Played</option>
-                            <option value="Want to buy">Want to buy</option>
-                            <option value="Owned">Owned</option>
-                        </Input>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <NoteIndex token={this.props.token} gameToReview={this.props.selectedGame} />
-                    </Row>
+                    <Form onSubmit={this.props.createGame}>
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <CardImg bottom width="100%" src={this.props.gameToReview.thumb_url} />
+                                </Card>
+                                <Label htmlFor="collection">Add To</Label>
+                                <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
+                                    <option></option>
+                                    <option value="Want to play">Want to play</option>
+                                    <option value="Played">Played</option>
+                                    <option value="Want to buy">Want to buy</option>
+                                    <option value="Owned">Owned</option>
+                                </Input>
+                            </Col>
+                            <Col>
+                                <p className="modalBody">
+                                    {this.props.gameToReview.description}
+                                </p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            {this.props.selectedGame &&
+                                <NoteIndex token={this.props.token} gameToReview={this.props.selectedGame} />}
+                        </Row>
                     </Form>
+                    </ModalBody>
+                    <ModalFooter>
                     <Button type="submit" color="warning">Submit</Button>
-                </ModalBody>
+                    {/* <Button color="secondary" onClick={toggle}>Cancel</Button> */}
+                    </ModalFooter>
             </Modal>
+            </div>
         )
     }
 }

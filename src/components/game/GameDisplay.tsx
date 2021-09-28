@@ -35,9 +35,8 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
             return (
                 <tr key={game.id}>
                     {/* <th scope="row">{game.id}</th> */}
-                    <td>{game.title}</td>
+                    <td>{game.name}</td>
                     <td>{game.description}</td>
-                    <td>{game.categories}</td>
                     <td>{game.collection}</td>
                     <td>
                         <Button color="warning" onClick={() => {
@@ -68,7 +67,6 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                             {/* <th>Id</th> */}
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Categories</th>
                             <th>Collection</th>
                             <th></th>
                             <th></th>

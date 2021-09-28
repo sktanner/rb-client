@@ -1,9 +1,17 @@
+
+// export type game = {
+//     title: string,
+//     description: string,
+//     image?: string,
+//     id: number,
+//     collection: string
+// }
+
 export type game = {
-    title: string,
-    description: string,
-    categories: string,
-    image?: string,
     id: number,
+    name: string,
+    description: string,
+    thumb_url: string,
     collection: string
 }
 
