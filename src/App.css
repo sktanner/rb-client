@@ -54,15 +54,24 @@ color: white;
 }
 
 .cardDiv {
-  width: 300px;
+  
   margin: 20px;
   /* position: relative; */
+  
+  /* flex-direction: row; */
+  
+}
+
+.cardSpacing {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .card {
   text-align: center;
+  width: 200px;
+  height: 300px;
 }
 
 .modalBody {

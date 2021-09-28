@@ -9,7 +9,7 @@ type GameDisplayProps = {
     fetchGames: () => Promise<void>
     // fetchNotes: () => Promise<void>
     updateOn: () => void
-    setGameToReview: (g: game) => void
+    // setGameToReview: (g: game) => void
     setSelectedGame: (g: game) => void
 }
 
@@ -40,7 +40,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                     <td>{game.collection}</td>
                     <td>
                         <Button color="warning" onClick={() => {
-                            this.props.setGameToReview(game)
+                            this.props.setSelectedGame(game)
                             this.props.updateOn()
                         }}>Update
                         </Button>

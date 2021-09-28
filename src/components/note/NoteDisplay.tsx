@@ -6,7 +6,7 @@ type NoteDisplayProps = {
     games: game[],
     notes: note[],
     token: string,
-    gameToReview: game
+    selectedGame: game
     fetchNotes: () => Promise<void>
     updateOn: () => void
     editUpdateNote: (notes: note) => void
@@ -22,7 +22,7 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
     constructor(props: NoteDisplayProps) {
         super(props)
         this.state = {
-            gameId: this.props.gameToReview.id
+            gameId: this.props.selectedGame.id
         }
     }
 

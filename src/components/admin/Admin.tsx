@@ -61,7 +61,7 @@ class Admin extends React.Component<AdminProps, AdminState> {
 
     componentDidMount(): void {
         this.fetchUsers()
-        console.log('fetching users');
+        // console.log('fetching users');
         
     }
 

@@ -4,7 +4,7 @@ import { game } from '../../types'
 
 type GameEditProps = {
     token: string,
-    gameToReview: game
+    selectedGame: game
     fetchGames: () => Promise<void>
     updateOff: () => void
 }
@@ -15,11 +15,11 @@ class GameEdit extends React.Component<GameEditProps, game> {
     constructor(props: GameEditProps) {
         super(props)
         this.state = {
-            name: this.props.gameToReview.name,
-            description: this.props.gameToReview.description,
-            id: this.props.gameToReview.id,
-            collection: this.props.gameToReview.collection,
-            thumb_url: this.props.gameToReview.thumb_url
+            name: this.props.selectedGame.name,
+            description: this.props.selectedGame.description,
+            id: this.props.selectedGame.id,
+            collection: this.props.selectedGame.collection,
+            thumb_url: this.props.selectedGame.thumb_url
         }
         this.gameUpdate = this.gameUpdate.bind(this)
     }
@@ -27,7 +27,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
     async gameUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         try {
-            let res = await fetch(`http://localhost:3000/game/${this.props.gameToReview.id}`, {
+            let res = await fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ name: this.state.name, description: this.state.description, collection: this.state.collection }),
                 headers: new Headers({

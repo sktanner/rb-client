@@ -18,7 +18,7 @@ class Search extends React.Component<SearchProps, SearchState> {
     let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
     let json = await res.json()
 
-    console.log(json);
+    console.info(json);
     this.setState({ games: json.games })
   }
 

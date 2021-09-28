@@ -7,7 +7,7 @@ import NoteEdit from '../note/NoteEdit'
 
 type NoteIndexProps = {
     token: string,
-    gameToReview: game,
+    selectedGame: game,
     // selectedGame: game
 }
 
@@ -34,7 +34,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
             // selectedGame: null,
             selectedNote: null,
             // gameToReview: null,
-            gameId: this.props.gameToReview.id
+            gameId: this.props.selectedGame.id
         }
         // this.fetchGames = this.fetchGames.bind(this)
         this.fetchNotes = this.fetchNotes.bind(this)
@@ -124,20 +124,20 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
             <Container>
                 <Row>
                     <Col md="3">
-                        {this.props.gameToReview &&
+                        {this.props.selectedGame &&
                             <NoteCreate 
                             games={this.state.games} 
                             token={this.props.token}
-                            gameToReview={this.props.gameToReview}
+                            selectedGame={this.props.selectedGame}
                             fetchNotes={this.fetchNotes} noteMapper={this.noteMapper}
                             />}
                     </Col>
                     <Col md="9">
-                    {this.props.gameToReview &&
-                        <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} gameToReview={this.props.gameToReview} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} noteMapper={this.noteMapper}
+                    {this.props.selectedGame &&
+                        <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} selectedGame={this.props.selectedGame} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} noteMapper={this.noteMapper}
                         />}
                     </Col>
-                    {this.props.gameToReview && this.state.updateActive && this.state.noteToUpdate ? <NoteEdit noteToUpdate={this.state.noteToUpdate} updateOff={this.updateOff} token={this.props.token} fetchNotes={this.fetchNotes} gameToReview={this.props.gameToReview} /> : <></>}
+                    {this.props.selectedGame && this.state.updateActive && this.state.noteToUpdate ? <NoteEdit noteToUpdate={this.state.noteToUpdate} updateOff={this.updateOff} token={this.props.token} fetchNotes={this.fetchNotes} selectedGame={this.props.selectedGame} /> : <></>}
                 </Row>
             </Container>
         )

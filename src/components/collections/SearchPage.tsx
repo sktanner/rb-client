@@ -13,7 +13,7 @@ type CollectionsState = {
     games: game[],
     updateActive: boolean,
     selectedGame: game | null,
-    gameToReview: game | null,
+    // gameToReview: game | null,
     nameSearch: string,
     name: string,
     description: string,
@@ -21,21 +21,13 @@ type CollectionsState = {
 }
 
 class CollectionsIndex extends React.Component<CollectionsProps, CollectionsState> {
-    async APIfetch(): Promise<void> {
-        let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
-        let json = await res.json()
-
-        console.log(json);
-        this.setState({ games: json.games })
-    }
-
     constructor(props: CollectionsProps) {
         super(props)
         this.state = {
             games: [],
             updateActive: false,
             selectedGame: null,
-            gameToReview: null,
+            // gameToReview: null,
             nameSearch: "",
             name: "",
             description: "",
@@ -47,24 +39,35 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.updateOff = this.updateOff.bind(this)
     }
 
+    async APIfetch(): Promise<void> {
+        let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
+        let json = await res.json()
+
+        console.info(json);
+        this.setState({ games: json.games })
+    }
     searchFunction(value: string) {
         this.setState({ nameSearch: value })
     }
 
-    createGame(e: React.FormEvent<HTMLFormElement>): void {
-        // this.state.games.map((game) => {
-        fetch('http://localhost:3000/game/create', {
+    async createGame(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault()
+        console.info("working")
+        let res = await fetch('http://localhost:3000/game/create', {
             method: "POST",
-            body: JSON.stringify({ name: this.state.name, description: this.state.description, image: this.state.thumb_url }),
+            body: JSON.stringify({
+                name: this.state.name,
+                description: this.state.description,
+                thumb_url: this.state.thumb_url
+            }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${this.props.token}`
             }),
         })
-            .then(res => res.json())
-            console.log("working");
-            
-        // })
+        let json = await res.json
+        // this.setState({ name: "", description: "", thumb_url: "" })
+        console.info(this.state.name);
     }
 
     async fetchGames(): Promise<void> {
@@ -87,27 +90,37 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.setState({ updateActive: false })
     }
 
-    setSelectedGame = (sg: game) => this.setState({ selectedGame: sg })
-
-    setGameToReview = (gr: game) => this.setState({ gameToReview: gr })
-
-    componentDidMount(): void {
-        this.fetchGames()
+    setSelectedGame = (game: game) => {
+        this.setState({
+            selectedGame: game,
+            name: game.name,
+            description: game.description,
+            thumb_url: game.thumb_url
+        })
     }
 
-    // collectionButton = () => {
-    //     return this.state.selectedGame && (
-    //         <GameInfo token={this.props.token} selectedGame={this.state.selectedGame} gameToReview={this.state.selectedGame} updateOff={this.updateOff} fetchGames={this.fetchGames}/>
-    //     )
-    // }
+    // setGameToReview = (gr: game) => this.setState({ gameToReview: gr })
+
+    componentDidMount(): void {
+        // this.fetchGames()
+    }
+
+    componentDidUpdate() {
+        console.info(this.state.selectedGame)
+        console.info(this.state.name)
+        console.info(this.state.description)
+        console.info(this.state.thumb_url)
+    }
 
     render() {
+        // console.info(this.state.name);
+
         return (
-            <CardDeck>
+            <>
                 <Input type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
                 <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
                 <h3>Results:</h3>
-
+                <div className="cardSpacing">
                 {this.state.games.map((game) => {
                     return (
                         <div className="cardDiv">
@@ -115,22 +128,22 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
                                 <CardBody>
                                     <CardTitle tag="h5">{game.name}</CardTitle>
                                     {/* {/* <CardImg src={game.thumb_url} /> */}
-                                </CardBody>
-                                <img width='100%' src={game.thumb_url} alt='Game logo' />
+                                {/* </CardBody> */}
+                                <img width='150px' max-height='200px' src={game.thumb_url} alt='Game logo' />
                                 {/* <CardText>{game.description}</CardText> */}
-                                <CardBody>
+                                {/* <CardBody> */}
                                     {/* <Link to="#"></Link> */}
-                                    <Button onClick={() => { this.setSelectedGame(game) }}>Save to Collection</Button>
+                                    <Button onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
                                 </CardBody>
                             </Card>
                         </div>
                     )
                 }
                 )}
-
+                </div>
                 {this.state.selectedGame &&
-                    <GameInfo gameToReview={this.state.selectedGame} selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} createGame={this.createGame} />}
-            </CardDeck>
+                    <GameInfo selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} createGame={this.createGame} />}
+            </>
         )
     }
 }

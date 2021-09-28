@@ -5,7 +5,7 @@ import { game } from '../../types'
 type NoteCreateProps = {
     games: game[],
     token: string,
-    gameToReview: game
+    selectedGame: game
     fetchNotes: () => Promise<void>
     noteMapper: () => JSX.Element[]
 }
@@ -20,7 +20,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         super(props)
         this.state = {
             content: "",
-            gameId: this.props.gameToReview.id 
+            gameId: this.props.selectedGame.id 
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -37,7 +37,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             })
         })
         let json = await res.json()
-        console.log(json)
+        console.info(json)
         this.setState({ content: "" })
         this.props.fetchNotes()  
         this.props.noteMapper()      

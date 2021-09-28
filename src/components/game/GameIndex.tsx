@@ -19,7 +19,7 @@ type GameIndexState = {
     // noteToUpdate: note | null,
     selectedGame: game | null,
     // selectedNote: note | null,
-    gameToReview: game | null
+    // gameToReview: game | null
 }
 
 class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
@@ -33,7 +33,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
             // noteToUpdate: null,
             selectedGame: null,
             // selectedNote: null,
-            gameToReview: null
+            // gameToReview: null
         }
         this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
@@ -67,7 +67,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     // setSelectedNote = (n: note) => this.setState({selectedNote: n})
 
-    setGameToReview = (g: game) => this.setState({gameToReview: g})
+    // setGameToReview = (g: game) => this.setState({gameToReview: g})
 
     componentDidMount(): void {
         this.fetchGames()
@@ -84,13 +84,13 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                         {/* <GameCreate fetchGames={this.fetchGames} token={this.props.token} /> */}
                     </Col>
                     <Col md="9">
-                        <GameDisplay games={this.state.games} setGameToReview={this.setGameToReview} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}
+                        <GameDisplay games={this.state.games} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}
                         setSelectedGame={this.setSelectedGame} />
                     </Col>
-                    {this.state.updateActive && this.state.gameToReview ? <GameEdit gameToReview={this.state.gameToReview} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} /> : <></>}
+                    {this.state.updateActive && this.state.selectedGame ? <GameEdit selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} /> : <></>}
                     <Col>
                     {this.state.selectedGame &&
-                    <NoteIndex token={this.props.token} gameToReview={this.state.selectedGame}/>}
+                    <NoteIndex token={this.props.token} selectedGame={this.state.selectedGame}/>}
                     </Col>
                 </Row>
             </Container>

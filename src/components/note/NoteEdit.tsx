@@ -4,7 +4,7 @@ import { game, note } from '../../types'
 
 type NoteEditProps = {
     token: string,
-    gameToReview: game,
+    selectedGame: game,
     noteToUpdate: note,
     fetchNotes: () => Promise<void>
     updateOff: () => void
@@ -20,7 +20,7 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
         super(props)
         this.state = {
             content: "",
-            gameId: this.props.gameToReview.id
+            gameId: this.props.selectedGame.id
         }
         this.noteUpdate = this.noteUpdate.bind(this)
     }
