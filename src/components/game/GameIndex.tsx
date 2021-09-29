@@ -4,7 +4,6 @@ import GameCreate from './GameCreate'
 import GameEdit from './GameEdit'
 import GameDisplay from './GameDisplay'
 import { game, note } from '../../types'
-// import Search from '../navigation/Search'
 import NoteIndex from '../note/NoteIndex'
 
 type GameIndexProps = {
@@ -15,11 +14,7 @@ type GameIndexState = {
     games: game[],
     notes: note[],
     updateActive: boolean,
-    // gameToUpdate: game | null,
-    // noteToUpdate: note | null,
     selectedGame: game | null,
-    // selectedNote: note | null,
-    // gameToReview: game | null
 }
 
 class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
@@ -29,11 +24,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
             games: [],
             notes: [],
             updateActive: false,
-            // gameToUpdate: null,
-            // noteToUpdate: null,
             selectedGame: null,
-            // selectedNote: null,
-            // gameToReview: null
         }
         this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
@@ -51,10 +42,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         this.setState({ games: json })
     }
 
-    // editUpdateGame = (games: game): void => {
-    //     this.setState({ gameToUpdate: games })
-    // }
-
     updateOn = (): void => {
         this.setState({ updateActive: true })
     }
@@ -65,10 +52,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     setSelectedGame = (g: game) => this.setState({selectedGame: g})
 
-    // setSelectedNote = (n: note) => this.setState({selectedNote: n})
-
-    // setGameToReview = (g: game) => this.setState({gameToReview: g})
-
     componentDidMount(): void {
         this.fetchGames()
     }
@@ -77,7 +60,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         return (
             <Container>
                 <Row>
-                    {/* <Search /> */}
                 </Row>
                 <Row>
                     <Col md="3">

@@ -34,20 +34,16 @@ class Auth extends React.Component<AuthProps, AuthState> {
             <Container fluid="sm" className="authContainer">
                 <Row>
                     {this.state.showLogin
-                        // <Col md="6">
                         ? <Register
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
                             updateIsAdmin={this.props.updateIsAdmin}
                         />
-                        // </Col>
-                        // <Col md="6" className="login-col">
                         : <Login
                             togglePortal={this.togglePortal}
                             updateToken={this.props.updateToken}
                             updateIsAdmin={this.props.updateIsAdmin}
                         />
-                        // </Col>
                     }
                 </Row>
             </Container>

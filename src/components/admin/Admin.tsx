@@ -30,7 +30,6 @@ class Admin extends React.Component<AdminProps, AdminState> {
         })
         let json = await res.json()
         this.setState({ users: json })
-        // console.log(this.state.users);
     }
 
     deleteUser(user: user) {
@@ -61,8 +60,6 @@ class Admin extends React.Component<AdminProps, AdminState> {
 
     componentDidMount(): void {
         this.fetchUsers()
-        // console.log('fetching users');
-        
     }
 
     render() {

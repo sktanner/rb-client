@@ -5,11 +5,8 @@ import { game } from '../../types'
 type GameDisplayProps = {
     games: game[],
     token: string,
-    // gameToReview: game,
     fetchGames: () => Promise<void>
-    // fetchNotes: () => Promise<void>
     updateOn: () => void
-    // setGameToReview: (g: game) => void
     setSelectedGame: (g: game) => void
 }
 
@@ -34,9 +31,8 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
 
             return (
                 <tr key={game.id}>
-                    {/* <th scope="row">{game.id}</th> */}
                     <td>{game.name}</td>
-                    <td>{game.description}</td>
+                    <td>{game.description.replace(/<[^>]+>/g, '')}</td>
                     <td>{game.collection}</td>
                     <td>
                         <Button color="warning" onClick={() => {
@@ -64,7 +60,6 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                 <Table striped>
                     <thead>
                         <tr>
-                            {/* <th>Id</th> */}
                             <th>Title</th>
                             <th>Description</th>
                             <th>Collection</th>

@@ -4,7 +4,8 @@ import { game } from '../../types'
 
 type GameEditProps = {
     token: string,
-    selectedGame: game
+    selectedGame: game,
+    // gameId: number
     fetchGames: () => Promise<void>
     updateOff: () => void
 }
@@ -25,6 +26,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
     }
 
     async gameUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        console.info(this.props.selectedGame)
         e.preventDefault()
         try {
             let res = await fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
@@ -40,6 +42,8 @@ class GameEdit extends React.Component<GameEditProps, game> {
             // console.info(json)
             this.props.fetchGames()
             this.props.updateOff()
+            console.info(json)
+            // console.info(this.props.gameId)
         } catch (err) {
             console.info(err)
         }

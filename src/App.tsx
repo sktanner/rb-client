@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Collections from './components/collections/Collections'
 
 type AppProps = {}
 
@@ -101,6 +102,9 @@ class App extends React.Component<AppProps, AppState> {
           <Route path="/search">
             <SearchPage token={this.state.token} />
           </Route>
+          <Route path="/collections">
+            <Collections token={this.state.token} />
+          </Route>
           <Route exact path="/admin">
             {this.adminViews}
           </Route>
@@ -109,38 +113,6 @@ class App extends React.Component<AppProps, AppState> {
     )
   }
 
-
-  // render() {
-  //   return (
-  //       <div className="App">
-  //         {/* <NavBar token={this.state.token} isAdmin={this.state.isAdmin}/> */}
-  //         <Navbar>
-  //           <NavbarBrand className="link">Game Room</NavbarBrand>
-  //           {this.state.isAdmin === "true" &&
-  //             <Link to="/admin" className="link">Admin</Link>}
-  //           {this.state.isAdmin === "true" &&
-  //             <Link to="/gameindex" className="link">Home</Link>}
-  //           {this.state.token === localStorage.getItem('token') &&
-  //             <Button  color="warning" onClick={this.clearToken}>Logout</Button>}
-  //         </Navbar>
-
-  //         {this.state.token === '' &&
-  //           <Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />}
-
-  //         <Switch>
-  //           <Route path="/gameindex">
-  //             {this.state.token === localStorage.getItem('token') &&
-  //               <GameIndex token={this.state.token} />}
-  //           </Route>
-  //           <Route exact path="/admin">
-  //             {this.state.isAdmin === "true" &&
-  //               <Admin token={this.state.token} isAdmin={this.state.isAdmin} />}
-  //           </Route>
-  //         </Switch>
-  //         {/* {this.protectedViews()} */}
-  //       </div>
-  //   )
-  // }
 }
 
 export default App

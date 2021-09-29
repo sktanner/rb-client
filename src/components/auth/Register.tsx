@@ -9,7 +9,6 @@ type RegProps = {
 }
 
 type RegState = {
-    // users: user
     email: string,
     password: string
 }

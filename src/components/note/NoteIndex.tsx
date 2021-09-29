@@ -7,17 +7,14 @@ import NoteEdit from '../note/NoteEdit'
 
 type NoteIndexProps = {
     token: string,
-    selectedGame: game,
-    // selectedGame: game
+    selectedGame: game
 }
 
 type NoteIndexState = {
     games: game[],
     notes: note[],
     updateActive: boolean,
-    // gameToUpdate: game | null,
     noteToUpdate: note | null,
-    // selectedGame: game | null,
     selectedNote: note | null,
     gameId: number
 }
@@ -29,14 +26,10 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
             games: [],
             notes: [],
             updateActive: false,
-            // gameToUpdate: null,
             noteToUpdate: null,
-            // selectedGame: null,
             selectedNote: null,
-            // gameToReview: null,
             gameId: this.props.selectedGame.id
         }
-        // this.fetchGames = this.fetchGames.bind(this)
         this.fetchNotes = this.fetchNotes.bind(this)
         this.updateOff = this.updateOff.bind(this)
         this.noteMapper = this.noteMapper.bind(this)
@@ -68,12 +61,6 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
         this.setState({ updateActive: false })
     }
 
-    // setSelectedGame = (g: game) => this.setState({selectedGame: g})
-
-    setSelectedNote = (n: note) => this.setState({selectedNote: n})
-
-    // setGameToReview = (g: game) => this.setState({gameToReview: g})
-
     componentDidMount(): void {
         this.fetchNotes()
     }
@@ -97,9 +84,6 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
                         <Button color="danger"
                             onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>
-                        {/* <Button
-                            onClick={() => { this.setSelectedNote(note) }}>
-                            Leave a note!</Button> */}
                     </td>
                 </tr>
             )

@@ -1,9 +1,7 @@
 import React from 'react'
-import { Container, Row, Col, Button, CollapseProps, Input, Card, CardText, CardBody, CardLink, CardTitle, CardDeck, CardImg, CardGroup } from 'reactstrap'
-import { game, note } from '../../types'
+import { Row, Col, Button, Input, Card, CardBody, CardTitle } from 'reactstrap'
+import { game } from '../../types'
 import GameInfo from './GameInfo'
-import Owned from './Owned'
-import { Link } from "react-router-dom";
 
 type CollectionsProps = {
     token: string
@@ -18,7 +16,8 @@ type CollectionsState = {
     name: string,
     description: string,
     thumb_url: string,
-    modal: boolean
+    modal: boolean,
+    gameId: number
 }
 
 class CollectionsIndex extends React.Component<CollectionsProps, CollectionsState> {
@@ -33,10 +32,10 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             name: "",
             description: "",
             thumb_url: "",
-            modal: false
+            modal: false,
+            gameId: 0
         }
         this.searchFunction = this.searchFunction.bind(this)
-        this.createGame = this.createGame.bind(this)
         this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
     }
@@ -50,26 +49,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
     }
     searchFunction(value: string) {
         this.setState({ nameSearch: value })
-    }
-
-    async createGame(e: React.FormEvent<HTMLFormElement>): Promise<void> {
-        e.preventDefault()
-        console.info("working")
-        let res = await fetch('http://localhost:3000/game/create', {
-            method: "POST",
-            body: JSON.stringify({
-                name: this.state.name,
-                description: this.state.description,
-                thumb_url: this.state.thumb_url
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
-            }),
-        })
-        let json = await res.json
-        // this.setState({ name: "", description: "", thumb_url: "" })
-        console.info(this.state.name);
     }
 
     async fetchGames(): Promise<void> {
@@ -92,34 +71,18 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.setState({ updateActive: false })
     }
 
-    setSelectedGame = (game: game) => {
+    setSelectedGame = (game: game | null) => {
         this.setState({
             selectedGame: game,
-            name: game.name,
-            description: game.description,
-            thumb_url: game.thumb_url
         })
     }
 
-    toggle = (): void => {
-        this.setState({ modal: !this.state.modal })
-    }
-
-    // setGameToReview = (gr: game) => this.setState({ gameToReview: gr })
 
     componentDidMount(): void {
         // this.fetchGames()
     }
 
-    componentDidUpdate() {
-        console.info(this.state.selectedGame)
-        console.info(this.state.name)
-        console.info(this.state.description)
-        console.info(this.state.thumb_url)
-    }
-
     render() {
-        // console.info(this.state.name);
 
         return (
             <>
@@ -139,15 +102,15 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
                 <br />
                 
                 <div className="cardSpacing">
-                    {this.state.games.map((game) => {
+                    {this.state.games.map((game: game) => {
                         return (
                             <div className="cardDiv">
-                                <Card fluid="sm" key={game.id}>
+                                <Card fluid="sm">
                                     <CardBody className="card">
                                         <CardTitle className="cardTitle" tag="h5">{game.name}</CardTitle>
                                         <img className="cardImg" src={game.thumb_url} alt='Game logo' />
                                         <br />
-                                        <Button onClick={() => { this.setSelectedGame(game); this.toggle() }}>View Game</Button>
+                                        <Button onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
                                     </CardBody>
                                 </Card>
                             </div>
@@ -156,7 +119,7 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
                     )}
                 </div>
                 {this.state.selectedGame &&
-                    <GameInfo selectedGame={this.state.selectedGame} modal={this.state.modal} updateOff={this.updateOff} toggle={this.toggle} token={this.props.token} fetchGames={this.fetchGames} createGame={this.createGame} />}
+                    <GameInfo setSelectedGame={this.setSelectedGame} selectedGame={this.state.selectedGame} token={this.props.token} />}
             </>
         )
     }

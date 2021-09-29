@@ -1,9 +1,7 @@
 import React from 'react'
-import { Container, Row, Col, Button, CollapseProps } from 'reactstrap'
 import { game, note } from '../../types'
 
 type WantToBuyProps = {
-    token: string
 }
 
 type WantToBuyState = {

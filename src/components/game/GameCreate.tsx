@@ -10,7 +10,6 @@ type GameCreateState = {
     name: string,
     description: string,
     collection: string
-    // image: string
 }
 
 class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
@@ -20,7 +19,6 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
             name: "",
             description: "",
             collection: ""
-            // image: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -65,9 +63,6 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
                             <option value="Owned">Owned</option>
                         </Input>
                     </FormGroup>
-                    {/* <FormGroup>
-                    <Label htmlFor="image"/>
-                </FormGroup> */}
                     <Button type="submit" color="warning">Submit</Button>
                 </Form>
             </div>

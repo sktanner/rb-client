@@ -3,7 +3,6 @@ import { Container, Row, Col, Button, CollapseProps } from 'reactstrap'
 import { game, note } from '../../types'
 
 type PlayedProps = {
-    token: string
 }
 
 type PlayedState = {

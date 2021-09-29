@@ -1,46 +1,54 @@
 import React from 'react'
-import { Container, Row, Col, Button, CollapseProps } from 'reactstrap'
+import { Table, Button } from 'reactstrap'
 import { game, note } from '../../types'
 
 type OwnedProps = {
-    token: string,
+    token: string
     games: game[]
-    // setSelectedGame: (g: game) => void
 }
 
 type OwnedState = {
+    ownedGames: game[]
 }
 
 class Owned extends React.Component<OwnedProps, OwnedState> {
     constructor(props: OwnedProps) {
         super(props)
         this.state = {
-            games: []
+            ownedGames: []
         }
     }
 
-    ownedMapper() {
-        return this.props.games.map((game: game) => {
-            return (
-                game.collection === "owned" && (
-                    <ul key={game.id}>
-                        <li>{game.name}</li>
-                    </ul>
-
-                )
-            )
+    setOwnedGames() {
+        this.setState({
+            ownedGames: this.props.games.filter(game => game.collection === "Owned")
         })
     }
 
+    // ownedMapper (): JSX.Element[] {
+    //     this.props.games.filter(game => game.collection === "Owned")
+        
+    //         console.info(this.props.games.filter(game => game.collection === "Owned"))
+
+    //         return (
+    //             <tr key={game.id}>
+    //                 <td>{game.name}</td>
+    //             </tr>
+    //             )
+    // }
+
 
     render() {
+        console.info(this.state.ownedGames)
         return (
-            <ul>
-                <li>
-                    {this.ownedMapper()}
-                    {/* each image is clickable and needs - onClick={() => { this.props.setSelectedGame(game) } */}
-                </li>
-            </ul>
+            <Table>
+                <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    {this.setOwnedGames}
+                </tbody>
+            </Table>
         )
     }
 }
