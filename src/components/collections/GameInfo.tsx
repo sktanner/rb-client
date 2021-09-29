@@ -68,9 +68,9 @@ class GameInfo extends React.Component<GameInfoProps, GameInfoState> {
                                 Choose a collection to put this in
                                 <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
                                     <option value="" selected disabled>Select</option>
-                                    <option value="Want to play">Want to play</option>
+                                    <option value="WantToPlay">Want to play</option>
                                     <option value="Played">Played</option>
-                                    <option value="Want to buy">Want to buy</option>
+                                    <option value="WantToBuy">Want to buy</option>
                                     <option value="Owned">Owned</option>
                                 </Input>
                             </Row>

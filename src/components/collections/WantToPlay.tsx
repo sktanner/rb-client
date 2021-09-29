@@ -1,26 +1,23 @@
 import React from 'react'
-import { game, note } from '../../types'
+import { game } from '../../types'
 
 type WantToPlayProps = {
+    token: string,
+    wantToPlayGames: game[]
 }
 
-type WantToPlayState = {
-    games: game[]
-}
-
-class WantToPlay extends React.Component<WantToPlayProps, WantToPlayState> {
-    constructor(props: WantToPlayProps) {
-        super(props)
-        this.state = {
-            games: []
-        }
-    }
-
+class WantToPlay extends React.Component<WantToPlayProps, {}> {
 
     render() {
         return (
-            <>
-            </>
+            <div className="colCardSpacing">
+                    {this.props.wantToPlayGames.map((game: game) => {
+                        return (
+                                        <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
+                        )
+                    }
+                    )}
+                </div>
         )
     }
 }

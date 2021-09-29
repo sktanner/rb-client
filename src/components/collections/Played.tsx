@@ -1,27 +1,23 @@
 import React from 'react'
-import { Container, Row, Col, Button, CollapseProps } from 'reactstrap'
-import { game, note } from '../../types'
+import { game } from '../../types'
 
 type PlayedProps = {
+    token: string,
+    playedGames: game[]
 }
 
-type PlayedState = {
-    games: game[]
-}
-
-class Played extends React.Component<PlayedProps, PlayedState> {
-    constructor(props: PlayedProps) {
-        super(props)
-        this.state = {
-            games: []
-        }
-    }
-
+class Played extends React.Component<PlayedProps, {}> {
 
     render() {
         return (
-            <>
-            </>
+            <div className="colCardSpacing">
+                    {this.props.playedGames.map((game: game) => {
+                        return (
+                                        <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
+                        )
+                    }
+                    )}
+                </div>
         )
     }
 }

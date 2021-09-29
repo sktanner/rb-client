@@ -53,6 +53,15 @@ color: white;
   flex-wrap: wrap;
 }
 
+.colCardSpacing {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: 2px solid black;
+  margin: 30px;
+  padding: 10px;
+}
+
 .card {
   align-items: center;
   width: 300px;
@@ -67,6 +76,13 @@ color: white;
   width:  200px;
   height: 200px;
   object-fit: fill;
+}
+
+.colCardImg {
+  width:  100px;
+  height: 100px;
+  object-fit: fill;
+  padding: auto;
 }
 
 .modalBody {

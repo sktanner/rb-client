@@ -9,7 +9,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link, 
+  Redirect
 } from "react-router-dom";
 import Collections from './components/collections/Collections'
 
@@ -79,12 +80,12 @@ class App extends React.Component<AppProps, AppState> {
             <NavbarBrand className="link">Game Room</NavbarBrand>
             {this.state.isAdmin === "true" &&
               <Link to="/admin" className="link">Admin</Link>}
-            {this.state.isAdmin === "true" &&
-              <Link to="/gameindex" className="link">Home</Link>}
-              {this.state.isAdmin === "true" &&
-              <Link to="/search" className="link">Search</Link>}
-              {this.state.isAdmin === "true" &&
-              <Link to="/collections" className="link">Collections</Link>}
+            
+              <Link to="/gameindex" className="link">Home</Link>
+              
+              <Link to="/search" className="link">Search</Link>
+              
+              <Link to="/collections" className="link">Collections</Link>
 
             <Link to='/'>
               <Button color="warning" onClick={this.clearToken}>Logout</Button>
@@ -97,13 +98,13 @@ class App extends React.Component<AppProps, AppState> {
             {this.protectedViews}
           </Route>
           <Route path="/gameindex">
-            <GameIndex token={this.state.token} />
+          {this.state.token ? <GameIndex token={this.state.token} /> : <Redirect to="/" />}
           </Route>
           <Route path="/search">
             <SearchPage token={this.state.token} />
           </Route>
           <Route path="/collections">
-            <Collections token={this.state.token} />
+            {this.state.token ? <Collections token={this.state.token} /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/admin">
             {this.adminViews}

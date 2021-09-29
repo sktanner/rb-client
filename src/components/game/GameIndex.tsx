@@ -31,6 +31,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
     }
 
     async fetchGames(): Promise<void> {
+        console.info(this.props.token)
         let res = await fetch('http://localhost:3000/game', {
             method: 'GET',
             headers: new Headers({
@@ -41,6 +42,20 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         let json = await res.json()
         this.setState({ games: json })
     }
+
+    // async fetchOwnedGames(): Promise<void> {
+    //     console.info(this.props.token)
+    //     let res = await fetch('http://localhost:3000/game/Owned', {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${this.props.token}`
+    //         })
+    //     })
+    //     let json = await res.json()
+    //     this.setState({ games: json })
+    //     console.info(this.state.games)
+    // }
 
     updateOn = (): void => {
         this.setState({ updateActive: true })
@@ -54,6 +69,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     componentDidMount(): void {
         this.fetchGames()
+        // this.fetchOwnedGames()
     }
 
     render() {
