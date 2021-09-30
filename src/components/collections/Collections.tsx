@@ -124,14 +124,14 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
                         <Owned token={this.props.token} games={this.state.games} ownedGames={this.state.ownedGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames}  />
                     </Col>
                     <Col>
-                    <h3>Played</h3>
-                        <Played token={this.props.token} games={this.state.games} playedGames={this.state.playedGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
                     <h3>Want to Buy</h3>
                         <WantToBuy token={this.props.token} games={this.state.games} wantToBuyGames={this.state.wantToBuyGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
+                    </Col>
+                    </Row>
+                <Row>
+                    <Col>
+                    <h3>Played</h3>
+                        <Played token={this.props.token} games={this.state.games} playedGames={this.state.playedGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
                     </Col>
                     <Col>
                     <h3>Want to Play</h3>

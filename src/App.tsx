@@ -62,14 +62,14 @@ class App extends React.Component<AppProps, AppState> {
 
   protectedViews = () => {
     return this.state.token === localStorage.getItem('token') ?
-      (<GameIndex token={this.state.token} />)
+      (<Collections token={this.state.token} />)
       : (<Auth updateToken={this.updateToken} updateIsAdmin={this.updateIsAdmin} />)
   }
 
   adminViews = () => {
     return localStorage.getItem('isAdmin') === 'true' ?
       (<Admin token={this.state.token} isAdmin={this.state.isAdmin} />)
-      : (<GameIndex token={this.state.token} />)
+      : (<Collections token={this.state.token} />)
   }
 
   render() {
@@ -77,15 +77,15 @@ class App extends React.Component<AppProps, AppState> {
       <div className="App">
         {this.state.token && (
           <Navbar>
-            <NavbarBrand className="link">Game Room</NavbarBrand>
+            <NavbarBrand className="NavLogo"></NavbarBrand>
             {this.state.isAdmin === "true" &&
               <Link to="/admin" className="link">Admin</Link>}
             
-              <Link to="/gameindex" className="link">Home</Link>
+              {/* <Link to="/gameindex" className="link">Home</Link> */}
               
               <Link to="/search" className="link">Search</Link>
               
-              <Link to="/collections" className="link">Collections</Link>
+              <Link to="/collections" className="link">My Collections</Link>
 
             <Link to='/'>
               <Button color="warning" onClick={this.clearToken}>Logout</Button>

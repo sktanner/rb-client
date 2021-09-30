@@ -31,6 +31,8 @@ class Auth extends React.Component<AuthProps, AuthState> {
 
     render() {
         return (
+            <div>
+                <div className="AppLogo"></div>
             <Container fluid="sm" className="authContainer">
                 <Row>
                     {this.state.showLogin
@@ -47,6 +49,7 @@ class Auth extends React.Component<AuthProps, AuthState> {
                     }
                 </Row>
             </Container>
+            </div>
         )
     }
 }
