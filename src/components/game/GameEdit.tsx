@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Button, ModalFooter, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import { game } from '../../types'
 import NoteIndex from '../note/NoteIndex'
 
@@ -31,7 +31,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
         this.gameUpdate = this.gameUpdate.bind(this)
     }
 
-    async gameUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    async gameUpdate(e: React.MouseEvent<HTMLButtonElement>): Promise<void> {
         console.info(this.props.selectedGame)
         e.preventDefault()
         try {
@@ -75,8 +75,6 @@ class GameEdit extends React.Component<GameEditProps, game> {
             <Modal isOpen={true}>
                 <ModalHeader>{this.state.name}</ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={this.gameUpdate}>
-                        <FormGroup>
                             <Label htmlFor="collection">Edit Collection:</Label>
                             <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
                                 <option value="" selected disabled>Select</option>
@@ -85,15 +83,17 @@ class GameEdit extends React.Component<GameEditProps, game> {
                                 <option value="WantToBuy">Want to buy</option>
                                 <option value="Owned">Owned</option>
                             </Input>
-                        </FormGroup>
-                        <Button type="submit">Update the Game!</Button>
+                        <Button type="submit" onClick={(e) => { this.gameUpdate(e) }}>Update the Game!</Button>
 
                         {this.props.selectedGame &&
                             <Button color="danger" onClick={() => { this.deleteGame(); this.props.setSelectedGame(null) }}>Remove from My Games</Button>}
 
                         {this.props.selectedGame &&
                             <NoteIndex token={this.props.token} selectedGame={this.props.selectedGame} />}
-                    </Form>
+
+<ModalFooter>
+                            <Button color="secondary" onClick={() => this.props.setSelectedGame(null)}>Cancel</Button>
+                        </ModalFooter>
                 </ModalBody>
             </Modal>
         )

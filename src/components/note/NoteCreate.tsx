@@ -39,7 +39,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         let json = await res.json()
         console.info(json)
         // this.setState({ content: "" })
-        // this.props.fetchNotes()  
+        this.props.fetchNotes()  
         // this.props.noteMapper()      
     }
 
