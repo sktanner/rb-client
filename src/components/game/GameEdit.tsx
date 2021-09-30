@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import { game } from '../../types'
+import NoteIndex from '../note/NoteIndex'
 
 type GameEditProps = {
     token: string,
@@ -11,6 +12,7 @@ type GameEditProps = {
     fetchPlayedGames: () => Promise<void>
     fetchWantToBuyGames: () => Promise<void>
     fetchWantToPlayGames: () => Promise<void>
+    setSelectedGame(g: game | null): void
     updateOff: () => void
 }
 
@@ -54,7 +56,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
         }
     }
 
-    deleteGame(selectedGame: game) {
+    deleteGame() {
         fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -62,6 +64,10 @@ class GameEdit extends React.Component<GameEditProps, game> {
                 'Authorization': `Bearer ${this.props.token}`
             })
         }).then(() => this.props.fetchGames())
+        this.props.fetchOwnedGames()
+        this.props.fetchPlayedGames()
+        this.props.fetchWantToBuyGames()
+        this.props.fetchWantToPlayGames()
     }
 
     render() {
@@ -83,7 +89,10 @@ class GameEdit extends React.Component<GameEditProps, game> {
                         <Button type="submit">Update the Game!</Button>
 
                         {this.props.selectedGame &&
-                        <Button color="danger" onClick={() => { this.deleteGame(selectedGame) }}>Remove from My Games</Button>}
+                            <Button color="danger" onClick={() => { this.deleteGame(); this.props.setSelectedGame(null) }}>Remove from My Games</Button>}
+
+                        {this.props.selectedGame &&
+                            <NoteIndex token={this.props.token} selectedGame={this.props.selectedGame} />}
                     </Form>
                 </ModalBody>
             </Modal>

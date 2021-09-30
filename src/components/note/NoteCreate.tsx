@@ -22,10 +22,10 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             content: "",
             gameId: this.props.selectedGame.id 
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
+        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    async handleSubmit( e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    handleSubmit = async(e: any) => {
         e.preventDefault()
         // console.log(this.state.content);    
                 let res = await fetch(`http://localhost:3000/note/${this.state.gameId}/create`, {
@@ -38,9 +38,9 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         })
         let json = await res.json()
         console.info(json)
-        this.setState({ content: "" })
-        this.props.fetchNotes()  
-        this.props.noteMapper()      
+        // this.setState({ content: "" })
+        // this.props.fetchNotes()  
+        // this.props.noteMapper()      
     }
 
     render() {
