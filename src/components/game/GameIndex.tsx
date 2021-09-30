@@ -85,7 +85,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                         <GameDisplay games={this.state.games} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}
                         setSelectedGame={this.setSelectedGame} />
                     </Col>
-                    {this.state.updateActive && this.state.selectedGame ? <GameEdit selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} /> : <></>}
+                    {/* {this.state.updateActive && this.state.selectedGame ? <GameEdit selectedGame={this.state.selectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.fetchGames} /> : <></>} */}
                     <Col>
                     {this.state.selectedGame &&
                     <NoteIndex token={this.props.token} selectedGame={this.state.selectedGame}/>}

@@ -4,9 +4,13 @@ import { game } from '../../types'
 
 type GameEditProps = {
     token: string,
-    selectedGame: game,
-    // gameId: number
+    games: game[],
+    selectedGame: game
     fetchGames: () => Promise<void>
+    fetchOwnedGames: () => Promise<void>
+    fetchPlayedGames: () => Promise<void>
+    fetchWantToBuyGames: () => Promise<void>
+    fetchWantToPlayGames: () => Promise<void>
     updateOff: () => void
 }
 
@@ -37,43 +41,49 @@ class GameEdit extends React.Component<GameEditProps, game> {
                     'Authorization': `Bearer ${this.props.token}`
                 })
             })
-            // console.info(res)
             let json = await res.json()
-            // console.info(json)
             this.props.fetchGames()
+            this.props.fetchOwnedGames()
+            this.props.fetchPlayedGames()
+            this.props.fetchWantToBuyGames()
+            this.props.fetchWantToPlayGames()
             this.props.updateOff()
             console.info(json)
-            // console.info(this.props.gameId)
         } catch (err) {
             console.info(err)
         }
     }
 
+    deleteGame(selectedGame: game) {
+        fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.props.token}`
+            })
+        }).then(() => this.props.fetchGames())
+    }
+
     render() {
         return (
             <Modal isOpen={true}>
-                <ModalHeader>Edit Game</ModalHeader>
+                <ModalHeader>{this.state.name}</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={this.gameUpdate}>
                         <FormGroup>
-                            <Label htmlFor="name">Edit Title:</Label>
-                            <Input name="name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="description">Edit Description:</Label>
-                            <Input name="description" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-                        </FormGroup>
-                        <FormGroup>
                             <Label htmlFor="collection">Edit Collection:</Label>
                             <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
-                                <option></option>
-                                <option value="Want to play">Want to play</option>
+                                <option value="" selected disabled>Select</option>
+                                <option value="WantToPlay">Want to play</option>
                                 <option value="Played">Played</option>
-                                <option value="Want to buy">Want to buy</option>
+                                <option value="WantToBuy">Want to buy</option>
                                 <option value="Owned">Owned</option>
                             </Input>
                         </FormGroup>
                         <Button type="submit">Update the Game!</Button>
+
+                        {this.props.selectedGame &&
+                        <Button color="danger" onClick={() => { this.deleteGame(selectedGame) }}>Remove from My Games</Button>}
                     </Form>
                 </ModalBody>
             </Modal>

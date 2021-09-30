@@ -53,6 +53,13 @@ color: white;
   flex-wrap: wrap;
 }
 
+.collectionSpacing {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
 .colCardSpacing {
   display: flex;
   justify-content: space-around;
@@ -82,7 +89,7 @@ color: white;
   width:  100px;
   height: 100px;
   object-fit: fill;
-  padding: auto;
+  margin: 5px;
 }
 
 .modalBody {
@@ -93,3 +100,11 @@ color: white;
 .searchBar.form-control {
   width: 400px;
 }
+
+.modal-backdrop.show{
+  opacity: .1 !important;
+}
+
+/* .modal-backdrop.fade {
+  opacity: .2 !important;
+} */

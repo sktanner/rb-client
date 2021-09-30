@@ -11,22 +11,43 @@ type CollectionsProps = {
 }
 
 type CollectionsState = {
+    games: game[]
     ownedGames: game[],
     playedGames: game[],
     wantToBuyGames: game[],
-    wantToPlayGames: game[]
+    wantToPlayGames: game[],
+    updateActive: boolean,
 }
 
 class Collections extends React.Component<CollectionsProps, CollectionsState> {
     constructor(props: CollectionsProps) {
         super(props)
         this.state = {
+            games: [],
             ownedGames: [],
             playedGames: [],
             wantToBuyGames: [],
-            wantToPlayGames: []
+            wantToPlayGames: [],
+            updateActive: false,
         }
+        this.fetchGames = this.fetchGames.bind(this)
         this.fetchOwnedGames = this.fetchOwnedGames.bind(this)
+        this.fetchPlayedGames = this.fetchPlayedGames.bind(this)
+        this.fetchWantToBuyGames = this.fetchWantToBuyGames.bind(this)
+        this.fetchWantToPlayGames = this.fetchWantToPlayGames.bind(this)
+    }
+
+    async fetchGames(): Promise<void> {
+        console.info(this.props.token)
+        let res = await fetch('http://localhost:3000/game', {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.props.token}`
+            })
+        })
+        let json = await res.json()
+        this.setState({ games: json })
     }
 
     async fetchOwnedGames(): Promise<void> {
@@ -39,6 +60,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
             })
         })
         let json = await res.json()
+        // console.log(json)
         this.setState({ ownedGames: json })
         console.info(this.state.ownedGames)
     }
@@ -85,6 +107,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
         console.info(this.state.wantToPlayGames)
     }
 
+
     componentDidMount(): void {
         this.fetchOwnedGames()
         this.fetchPlayedGames()
@@ -94,21 +117,25 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     render() {
         return (
-            <div className="cardSpacing">
+            <div className="collectionSpacing">
                 <Row>
                     <Col>
-                        <Owned token={this.props.token} ownedGames={this.state.ownedGames} />
+                    <h3>Owned</h3>
+                        <Owned token={this.props.token} games={this.state.games} ownedGames={this.state.ownedGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames}  />
                     </Col>
                     <Col>
-                        <Played token={this.props.token} playedGames={this.state.playedGames} />
+                    <h3>Played</h3>
+                        <Played token={this.props.token} games={this.state.games} playedGames={this.state.playedGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <WantToBuy token={this.props.token} wantToBuyGames={this.state.wantToBuyGames} />
+                    <h3>Want to Buy</h3>
+                        <WantToBuy token={this.props.token} games={this.state.games} wantToBuyGames={this.state.wantToBuyGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
                     </Col>
                     <Col>
-                        <WantToPlay token={this.props.token} wantToPlayGames={this.state.wantToPlayGames} />
+                    <h3>Want to Play</h3>
+                        <WantToPlay token={this.props.token} games={this.state.games} wantToPlayGames={this.state.wantToPlayGames} updateActive={this.state.updateActive} fetchGames={this.fetchGames} fetchOwnedGames={this.fetchOwnedGames} fetchPlayedGames={this.fetchPlayedGames} fetchWantToBuyGames={this.fetchWantToBuyGames} fetchWantToPlayGames={this.fetchWantToPlayGames} />
                     </Col>
                 </Row>
             </div>

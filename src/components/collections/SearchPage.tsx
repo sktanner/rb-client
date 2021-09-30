@@ -36,7 +36,7 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             gameId: 0
         }
         this.searchFunction = this.searchFunction.bind(this)
-        this.fetchGames = this.fetchGames.bind(this)
+        // this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
     }
 
@@ -51,17 +51,17 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.setState({ nameSearch: value })
     }
 
-    async fetchGames(): Promise<void> {
-        let res = await fetch('http://localhost:3000/game', {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.props.token}`
-            })
-        })
-        let json = await res.json()
-        this.setState({ games: json })
-    }
+    // async fetchGames(): Promise<void> {
+    //     let res = await fetch('http://localhost:3000/game', {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${this.props.token}`
+    //         })
+    //     })
+    //     let json = await res.json()
+    //     this.setState({ games: json })
+    // }
 
     updateOn = (): void => {
         this.setState({ updateActive: true })
