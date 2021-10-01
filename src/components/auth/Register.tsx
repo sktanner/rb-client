@@ -1,6 +1,7 @@
 import React from "react"
 import { Form, FormGroup, Label, Input, Button, Badge, Container, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import APIURL from "../../helpers/environment"
 
 type RegProps = {
     updateToken: (newToken: string) => void
@@ -26,7 +27,7 @@ class Register extends React.Component<RegProps, RegState> {
 
     async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault();
-        let res = await fetch("http://localhost:3000/user/register", {
+        let res = await fetch(`${APIURL}/user/register`, {
             method: 'POST',
             body: JSON.stringify({ user: { email: this.state.email, password: this.state.password } }),
             headers: new Headers({

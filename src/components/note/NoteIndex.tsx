@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Button } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
 import NoteCreate from '../note/NoteCreate'
 import NoteDisplay from '../note/NoteDisplay'
@@ -37,7 +38,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
 
     async fetchNotes(): Promise<void> {
         
-        let res = await fetch(`http://localhost:3000/note/${this.state.gameId}`, {
+        let res = await fetch(`${APIURL}/note/${this.state.gameId}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
     deleteNote(note: note) {
         console.log(note);
         
-        fetch(`http://localhost:3000/note/${note.id}`, {
+        fetch(`${APIURL}/note/${note.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

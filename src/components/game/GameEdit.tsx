@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, ModalFooter, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game } from '../../types'
 import NoteIndex from '../note/NoteIndex'
 
@@ -35,7 +36,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
         console.info(this.props.selectedGame)
         e.preventDefault()
         try {
-            let res = await fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
+            let res = await fetch(`${APIURL}/game/${this.props.selectedGame.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ name: this.state.name, description: this.state.description, collection: this.state.collection }),
                 headers: new Headers({
@@ -57,7 +58,7 @@ class GameEdit extends React.Component<GameEditProps, game> {
     }
 
     deleteGame() {
-        fetch(`http://localhost:3000/game/${this.props.selectedGame.id}`, {
+        fetch(`${APIURL}/game/${this.props.selectedGame.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

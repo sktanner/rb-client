@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
 
 type NoteEditProps = {
@@ -28,7 +29,7 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
     async noteUpdate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         try {
-            let res = await fetch(`http://localhost:3000/note/${this.props.noteToUpdate.id}`, {
+            let res = await fetch(`${APIURL}/note/${this.props.noteToUpdate.id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ content: this.state.content }),
                 headers: new Headers({

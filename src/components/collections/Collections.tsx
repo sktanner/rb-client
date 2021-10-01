@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
 import Owned from './Owned'
 import Played from './Played'
@@ -39,7 +40,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     async fetchGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game', {
+        let res = await fetch(`${APIURL}/game`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     async fetchOwnedGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game/Owned', {
+        let res = await fetch(`${APIURL}/game/Owned`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -67,7 +68,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     async fetchPlayedGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game/Played', {
+        let res = await fetch(`${APIURL}/game/Played`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     async fetchWantToBuyGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game/WantToBuy', {
+        let res = await fetch(`${APIURL}/game/WantToBuy`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -95,7 +96,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     async fetchWantToPlayGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game/WantToPlay', {
+        let res = await fetch(`${APIURL}/game/WantToPlay`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

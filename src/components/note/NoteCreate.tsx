@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game } from '../../types'
 
 type NoteCreateProps = {
@@ -28,7 +29,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
     handleSubmit = async(e: any) => {
         e.preventDefault()
         // console.log(this.state.content);    
-                let res = await fetch(`http://localhost:3000/note/${this.state.gameId}/create`, {
+                let res = await fetch(`${APIURL}/note/${this.state.gameId}/create`, {
             method: 'POST',
             body: JSON.stringify({ content: this.state.content }),
             headers: new Headers({

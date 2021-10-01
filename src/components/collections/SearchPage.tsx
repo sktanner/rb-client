@@ -51,18 +51,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.setState({ nameSearch: value })
     }
 
-    // async fetchGames(): Promise<void> {
-    //     let res = await fetch('http://localhost:3000/game', {
-    //         method: 'GET',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${this.props.token}`
-    //         })
-    //     })
-    //     let json = await res.json()
-    //     this.setState({ games: json })
-    // }
-
     updateOn = (): void => {
         this.setState({ updateActive: true })
     }
@@ -75,11 +63,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         this.setState({
             selectedGame: game,
         })
-    }
-
-
-    componentDidMount(): void {
-        // this.fetchGames()
     }
 
     render() {

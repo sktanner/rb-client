@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 
 type GameCreateProps = {
     token: string,
@@ -26,7 +27,7 @@ class GameCreate extends React.Component<GameCreateProps, GameCreateState> {
     async handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
         // console.log("working");
-        let res = await fetch('http://localhost:3000/game/create', {
+        let res = await fetch(`${APIURL}/game/create`, {
             method: 'POST',
             body: JSON.stringify({ name: this.state.name, description: this.state.description, collection: this.state.collection }),
             headers: new Headers({

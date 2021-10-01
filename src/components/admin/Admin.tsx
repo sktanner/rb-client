@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'reactstrap'
 import { user } from '../../types'
+import APIURL from '../../helpers/environment'
 
 type AdminProps = {
     token: string,
@@ -21,7 +22,7 @@ class Admin extends React.Component<AdminProps, AdminState> {
     }
 
     async fetchUsers(): Promise<void> {
-        let res = await fetch('http://localhost:3000/user/', {
+        let res = await fetch(`${APIURL}/user/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ class Admin extends React.Component<AdminProps, AdminState> {
 
     deleteUser(user: user) {
         // console.info(user.id)
-        fetch(`http://localhost:3000/user/${user.id}`, {
+        fetch(`${APIURL}/user/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

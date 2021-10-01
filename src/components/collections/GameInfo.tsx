@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardImg, Row, Col } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game, } from '../../types'
 import GameEdit from '../game/GameEdit'
 
@@ -24,7 +25,7 @@ class GameInfo extends React.Component<GameInfoProps, GameInfoState> {
     createGame = async(e: any) =>  {
         e.preventDefault()
         console.info(this.state)
-        let res = await fetch('http://localhost:3000/game/create', {
+        let res = await fetch(`${APIURL}/game/create`, {
             method: "POST",
             body: JSON.stringify({
                 name: this.props.selectedGame.name,

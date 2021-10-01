@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Button } from 'reactstrap'
+import APIURL from '../../helpers/environment'
 import { game } from '../../types'
 
 type GameDisplayProps = {
@@ -16,7 +17,7 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
 
     deleteGame(game: game) {
         // console.info(game.id)
-        fetch(`http://localhost:3000/game/${game.id}`, {
+        fetch(`${APIURL}/game/${game.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

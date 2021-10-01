@@ -5,6 +5,7 @@ import GameEdit from './GameEdit'
 import GameDisplay from './GameDisplay'
 import { game, note } from '../../types'
 import NoteIndex from '../note/NoteIndex'
+import APIURL from '../../helpers/environment'
 
 type GameIndexProps = {
     token: string
@@ -32,7 +33,7 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     async fetchGames(): Promise<void> {
         console.info(this.props.token)
-        let res = await fetch('http://localhost:3000/game', {
+        let res = await fetch(`${APIURL}/game`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -42,20 +43,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
         let json = await res.json()
         this.setState({ games: json })
     }
-
-    // async fetchOwnedGames(): Promise<void> {
-    //     console.info(this.props.token)
-    //     let res = await fetch('http://localhost:3000/game/Owned', {
-    //         method: 'GET',
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${this.props.token}`
-    //         })
-    //     })
-    //     let json = await res.json()
-    //     this.setState({ games: json })
-    //     console.info(this.state.games)
-    // }
 
     updateOn = (): void => {
         this.setState({ updateActive: true })

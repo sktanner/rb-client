@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, FormGroup, Label, Input, Button, Badge, Col, Container } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import APIURL from '../../helpers/environment'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
@@ -25,7 +26,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 
     async handleSubmit (e: React.FormEvent<HTMLFormElement>): Promise<void> {
         e.preventDefault()
-        let res = await fetch("http://localhost:3000/user/login", {
+        let res = await fetch(`${APIURL}/user/login`, {
             method: 'POST',
             body: JSON.stringify({user:{email: this.state.email, password: this.state.password}}),
             headers: new Headers({
