@@ -55,7 +55,7 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
                             <Label htmlFor="content">Edit Content:</Label>
                             <Input name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
                         </FormGroup>
-                        <Button type="submit">Update the Note!</Button>
+                        <Button color="warning" type="submit">Update the Note</Button>
                     </Form>
                 </ModalBody>
             </Modal>

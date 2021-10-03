@@ -5,42 +5,35 @@
   height: 100vh;
 }
 
-.AppLogo {
-  background-image: url(./assets/AppLogo.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  /* background-position: center; */
-  height: 125px;
-  margin: 20px;
-}
-
 .NavLogo {
-  background-image: url(./assets/NavLogo.png);
-  background-size: contain;
-  background-repeat: no-repeat;
   float: left !important;
   margin-top: -15px !important;
+  display: flex;
+  align-self: flex-start !important;
 }
 
-.authContainer {
-  margin-top: 7%;
+.navbar {
+  padding: 1rem;
 }
 
-.authForm {
-  margin: auto;
-  padding: 10px;
-  width: 50%;
-  background-color: #f04f54;
-  border-radius: 7px;
+.navLinks {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.row {
+  --bs-gutter-x: none !important;
 }
 
 .link {
   text-decoration: none;
-  color: black
+  color: black;
+  padding: 10px;
 }
 
 .link:hover {
-  color: black
+  color: #f04f54;
 }
 
 .authLink {
@@ -52,16 +45,15 @@ color: white;
   color: black
 }
 
-.navbar {
-  padding: 1rem;
-}
-
 .thumb {
   max-height: 100px;
 }
 
 .cardDiv {
   margin: 20px;
+  width: 300px;
+  height: 350px;
+  align-items: center;
 }
 
 .cardSpacing {
@@ -86,10 +78,8 @@ color: white;
   padding: 10px;
 }
 
-.card {
-  align-items: center;
-  width: 300px;
-  height: 350px;
+.card-body {
+  padding: 5px;
 }
 
 .cardTitle {
@@ -100,6 +90,14 @@ color: white;
   width:  200px;
   height: 200px;
   object-fit: fill;
+  padding-bottom: 10px;
+}
+
+.gameInfoCard {
+  align-items: center;
+  border: none !important;
+  width: 300px;
+  height: 350px;
 }
 
 .colCardImg {
@@ -109,27 +107,44 @@ color: white;
   margin: 5px;
   cursor: pointer;
   position: relative;
-  /* z-index: -2; */
-  /* box-shadow: inset 0 0 20px rgba(255, 255, 255, 0); */
-  /* transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1); */
 }
 
 .colCardImg:hover {
   transform: scale(1.2) perspective(0pc);
 }
 
-/* .imgDiv {
-  width:  100px;
-  height: 100px;
-} */
+.gameInfoImg {
+  max-height: 345px;
+}
 
-/* .imgDiv:hover {
-  transform: scale(1.2) perspective(0pc);
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-  box-shadow: inset 3px 4px 5px 6px #FFF !important;
-} */
+.addToColl {
+  width: 300px !important;
+}
 
+.gameEditButtons {
+  margin-top: 24px !important;
+  margin-left: 10px;
+}
 
+.editButton {
+  margin-right: 10px;
+}
+
+.noteButtons {
+  margin: 5px;
+}
+
+.addNoteButton {
+  margin-left: 10px;
+}
+
+.addNote {
+  margin: 0 !important;
+}
+
+.noteInput {
+  width: 290px !important;
+}
 
 .modalBody {
   height: 400px;
@@ -138,12 +153,21 @@ color: white;
 
 .searchBar.form-control {
   width: 400px;
+  margin-right: 20px;
+}
+
+.searchSpacing {
+  margin-left: 34%;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
 }
 
 .modal-backdrop.show{
   opacity: .1 !important;
 }
-
-/* .modal-backdrop.fade {
-  opacity: .2 !important;
-} */

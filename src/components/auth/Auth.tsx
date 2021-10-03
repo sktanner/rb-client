@@ -1,11 +1,13 @@
 import React from "react"
+import './Auth.css'
 import { Container, Row, Col } from 'reactstrap'
 import Register from "./Register"
 import Login from "./Login"
+import AppLogo from "../../assets/AppLogo.png"
 
 type AuthProps = {
     updateToken: (newToken: string) => void
-    updateIsAdmin: (setAdmin: string) => void 
+    updateIsAdmin: (setAdmin: string) => void
 }
 
 type AuthState = {
@@ -32,23 +34,28 @@ class Auth extends React.Component<AuthProps, AuthState> {
     render() {
         return (
             <div>
-                <div className="AppLogo"></div>
-            <Container fluid="sm" className="authContainer">
                 <Row>
-                    {this.state.showLogin
-                        ? <Register
-                            togglePortal={this.togglePortal}
-                            updateToken={this.props.updateToken}
-                            updateIsAdmin={this.props.updateIsAdmin}
-                        />
-                        : <Login
-                            togglePortal={this.togglePortal}
-                            updateToken={this.props.updateToken}
-                            updateIsAdmin={this.props.updateIsAdmin}
-                        />
-                    }
+                    <Col>
+                        <img className="AppLogo" src={AppLogo}></img>
+                    </Col>
                 </Row>
-            </Container>
+
+                <Container fluid="sm" className="authContainer">
+                    <Row>
+                        {this.state.showLogin
+                            ? <Register
+                                togglePortal={this.togglePortal}
+                                updateToken={this.props.updateToken}
+                                updateIsAdmin={this.props.updateIsAdmin}
+                            />
+                            : <Login
+                                togglePortal={this.togglePortal}
+                                updateToken={this.props.updateToken}
+                                updateIsAdmin={this.props.updateIsAdmin}
+                            />
+                        }
+                    </Row>
+                </Container>
             </div>
         )
     }

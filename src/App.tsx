@@ -9,10 +9,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link, 
+  Link,
   Redirect
 } from "react-router-dom";
 import Collections from './components/collections/Collections'
+import NavLogo from './assets/NavLogo.png'
 
 type AppProps = {}
 
@@ -33,7 +34,7 @@ class App extends React.Component<AppProps, AppState> {
   componentDidMount(): void {
     if (localStorage.getItem('token')) {
       this.setState({
-        token: localStorage.getItem('token')! //nonnull assertion expression operator
+        token: localStorage.getItem('token')!
       })
     }
     if (localStorage.getItem('isAdmin')) {
@@ -46,13 +47,11 @@ class App extends React.Component<AppProps, AppState> {
   updateToken = (newToken: string): void => {
     localStorage.setItem('token', newToken)
     this.setState({ token: newToken })
-    // console.log(this.state.token)
   }
 
   updateIsAdmin = (setAdmin: string): void => {
     localStorage.setItem('isAdmin', setAdmin)
     this.setState({ isAdmin: setAdmin })
-    // console.log(this.state.isAdmin)
   }
 
   clearToken = () => {
@@ -77,28 +76,31 @@ class App extends React.Component<AppProps, AppState> {
       <div className="App">
         {this.state.token && (
           <Navbar>
-            <NavbarBrand className="NavLogo"></NavbarBrand>
-            {this.state.isAdmin === "true" &&
-              <Link to="/admin" className="link">Admin</Link>}
-            
-              {/* <Link to="/gameindex" className="link">Home</Link> */}
-              
+            <NavbarBrand className="NavLogo">
+              <img src={NavLogo}></img>
+            </NavbarBrand>
+
+            <div className="navLinks">
+              {this.state.isAdmin === "true" &&
+                <Link to="/admin" className="link">Admin</Link>}
+
               <Link to="/search" className="link">Search</Link>
-              
+
               <Link to="/collections" className="link">My Collections</Link>
 
-            <Link to='/'>
-              <Button color="warning" onClick={this.clearToken}>Logout</Button>
-            </Link>
+              <Link to='/'>
+                <Button color="warning" onClick={this.clearToken}>Logout</Button>
+              </Link>
+            </div>
           </Navbar>
         )}
-        
+
         <Switch>
           <Route exact path='/'>
             {this.protectedViews}
           </Route>
           <Route path="/gameindex">
-          {this.state.token ? <GameIndex token={this.state.token} /> : <Redirect to="/" />}
+            {this.state.token ? <GameIndex token={this.state.token} /> : <Redirect to="/" />}
           </Route>
           <Route path="/search">
             <SearchPage token={this.state.token} />
@@ -113,7 +115,6 @@ class App extends React.Component<AppProps, AppState> {
       </div>
     )
   }
-
 }
 
 export default App

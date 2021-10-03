@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Button, Input, Card, CardBody, CardTitle } from 'reactstrap'
+import { Button, Input, Card, CardBody, CardTitle, Form, FormGroup } from 'reactstrap'
 import { game } from '../../types'
 import GameInfo from './GameInfo'
 
@@ -11,7 +11,6 @@ type CollectionsState = {
     games: game[],
     updateActive: boolean,
     selectedGame: game | null,
-    // gameToReview: game | null,
     nameSearch: string,
     name: string,
     description: string,
@@ -27,7 +26,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             games: [],
             updateActive: false,
             selectedGame: null,
-            // gameToReview: null,
             nameSearch: "",
             name: "",
             description: "",
@@ -36,7 +34,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             gameId: 0
         }
         this.searchFunction = this.searchFunction.bind(this)
-        // this.fetchGames = this.fetchGames.bind(this)
         this.updateOff = this.updateOff.bind(this)
     }
 
@@ -66,34 +63,29 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
     }
 
     render() {
-
         return (
             <>
-            <br/>
-            <h3>Search for a Game!</h3>
-            <br/>
-            <Row>
-                <Col></Col>
-                <Col>
-                <Input className="searchBar" type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
-                </Col>
-                <Col>
-                <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
-                </Col>
-                <Col></Col>
-                </Row>
                 <br />
-                
+                <h3>Search for a Game!</h3>
+                <br />
+                <Form inline>
+                    <FormGroup className="searchSpacing">
+                        <Input className="searchBar" type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
+                    </FormGroup>
+                    <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
+                </Form>
+                <br />
+
                 <div className="cardSpacing">
                     {this.state.games.map((game: game) => {
                         return (
                             <div className="cardDiv">
                                 <Card fluid="sm">
-                                    <CardBody className="card">
+                                    <CardBody className="cardStyle">
                                         <CardTitle className="cardTitle" tag="h5">{game.name}</CardTitle>
                                         <img className="cardImg" src={game.thumb_url} alt='Game logo' />
-                                        <br />
-                                        <Button onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
+
+                                        <Button color="warning" onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
                                     </CardBody>
                                 </Card>
                             </div>

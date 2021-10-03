@@ -12,7 +12,6 @@ type OwnedProps = {
     fetchPlayedGames: () => Promise<void>
     fetchWantToBuyGames: () => Promise<void>
     fetchWantToPlayGames: () => Promise<void>
-    // modalOpen (): void
 }
 
 type OwnedState = {
@@ -47,14 +46,16 @@ class Owned extends React.Component<OwnedProps, OwnedState> {
         console.log(this.props.ownedGames)
         return (
             <div className="colCardSpacing">
+
+                {this.props.ownedGames.length === 0 && "Add some Games!"}
+
                 {this.props.ownedGames && this.props.ownedGames.map((game: game) => {
                     return (
                         <div>
-                            <a onClick={() => { this.setSelectedGame(game); this.updateOn() }}>
-                            <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
+                            <a className="colCardLink" onClick={() => { this.setSelectedGame(game); this.updateOn() }}>
+                                <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
                             </a>
-                                        
-                                    
+
                             {this.state.updateActive && this.state.selectedGame ? <GameEdit games={this.props.games} selectedGame={this.state.selectedGame} setSelectedGame={this.setSelectedGame} updateOff={this.updateOff} token={this.props.token} fetchGames={this.props.fetchGames} fetchOwnedGames={this.props.fetchOwnedGames} fetchPlayedGames={this.props.fetchPlayedGames} fetchWantToBuyGames={this.props.fetchWantToBuyGames} fetchWantToPlayGames={this.props.fetchWantToPlayGames} /> : <></>}
                         </div>
                     )

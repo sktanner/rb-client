@@ -46,13 +46,14 @@ class Played extends React.Component<PlayedProps, PlayedState> {
         console.log(this.props.playedGames)
         return (
             <div className="colCardSpacing">
+
+                {this.props.playedGames.length === 0 && "Add some Games!"}
+
                 {this.props.playedGames && this.props.playedGames.map((game: game) => {
                     return (
                         <div>
                             <a onClick={() => { this.setSelectedGame(game); this.updateOn() }}>
-                                <div className="imgDiv">
-                                    <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
-                                </div>
+                                <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
                             </a>
 
 

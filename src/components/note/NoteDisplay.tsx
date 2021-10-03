@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button } from 'reactstrap'
+import { Table } from 'reactstrap'
 import { game, note } from '../../types'
 
 type NoteDisplayProps = {
@@ -10,7 +10,6 @@ type NoteDisplayProps = {
     fetchNotes: () => Promise<void>
     updateOn: () => void
     editUpdateNote: (notes: note) => void
-    // setSelectedNote: (n:note) => void
     noteMapper: () => JSX.Element[]
 }
 
@@ -29,8 +28,6 @@ class NoteDisplay extends React.Component<NoteDisplayProps, NoteDisplayState> {
     render() {
         return (
             <>
-                <h3>Notes</h3>
-                <hr />
                 <Table striped>
                     <thead>
                         <tr>

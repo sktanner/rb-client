@@ -1,8 +1,7 @@
 import React from 'react'
-import { Button, Form, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardImg, Row, Col } from 'reactstrap'
+import { Button, Form, Input, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardImg, Row, Col } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game, } from '../../types'
-import GameEdit from '../game/GameEdit'
 
 type GameInfoProps = {
     token: string,
@@ -42,10 +41,6 @@ class GameInfo extends React.Component<GameInfoProps, GameInfoState> {
         console.info(json.data.id, "CREATE");
     }
 
-    componentDidUpdate(){
-        console.log(this.state)
-    }
-
     render() {
         return (
             <div>
@@ -55,8 +50,8 @@ class GameInfo extends React.Component<GameInfoProps, GameInfoState> {
                         <ModalBody>
                             <Row>
                                 <Col>
-                                    <Card>
-                                        <CardImg bottom width="100%" src={this.props.selectedGame.thumb_url} />
+                                    <Card className="gameInfoCard">
+                                        <CardImg className="gameInfoImg" src={this.props.selectedGame.thumb_url} />
                                     </Card>
                                 </Col>
                                 <Col>
@@ -64,21 +59,19 @@ class GameInfo extends React.Component<GameInfoProps, GameInfoState> {
                                         {this.props.selectedGame.description.replace(/<[^>]+>/g, '')}
                                     </p>
                                 </Col>
-                                </Row>
-                                <Row>
-                                Choose a collection to put this in
-                                <Input type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
-                                    <option value="" selected disabled>Select</option>
-                                    <option value="WantToPlay">Want to play</option>
-                                    <option value="Played">Played</option>
-                                    <option value="WantToBuy">Want to buy</option>
-                                    <option value="Owned">Owned</option>
-                                </Input>
                             </Row>
+                            Add to your collection:
+                            <Input className="addToColl" type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
+                                <option value="" selected disabled>Select</option>
+                                <option value="WantToPlay">Want to play</option>
+                                <option value="Played">Played</option>
+                                <option value="WantToBuy">Want to buy</option>
+                                <option value="Owned">Owned</option>
+                            </Input>
                         </ModalBody>
                         <ModalFooter>
                             <Button type="submit" color="warning">Save to Collection</Button>
-                            <Button color="secondary" onClick={() => this.props.setSelectedGame(null)}>Cancel</Button>
+                            <Button color="danger" onClick={() => this.props.setSelectedGame(null)}>Cancel</Button>
                         </ModalFooter>
                     </Form>
                 </Modal>

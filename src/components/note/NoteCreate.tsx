@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, Label, Input } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game } from '../../types'
 
@@ -23,12 +23,11 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             content: "",
             gameId: this.props.selectedGame.id 
         }
-        // this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit = async(e: any) => {
         e.preventDefault()
-        // console.log(this.state.content);    
                 let res = await fetch(`${APIURL}/note/${this.state.gameId}/create`, {
             method: 'POST',
             body: JSON.stringify({ content: this.state.content }),
@@ -39,21 +38,20 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         })
         let json = await res.json()
         console.info(json)
-        // this.setState({ content: "" })
+        this.setState({ content: "" })
         this.props.fetchNotes()  
-        // this.props.noteMapper()      
     }
 
     render() {
         return (
             <div>
-                <h3>Add a Note</h3>
-                <Form onSubmit={this.handleSubmit}>
-                    <FormGroup>
+                <h5>Add a note!</h5>
+                <Form inline className="addNote" onSubmit={this.handleSubmit}>
+                    
                         <Label htmlFor="content" />
-                        <Input name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
-                    </FormGroup>
-                    <Button color="warning" type="submit">Submit</Button>
+                        <Input className="noteInput" name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
+                    
+                    <Button className="addNoteButton" color="warning" type="submit">Submit</Button>
                 </Form>
             </div>
         )

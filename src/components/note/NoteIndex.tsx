@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Col, Button } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
 import NoteCreate from '../note/NoteCreate'
@@ -73,16 +73,15 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
 
             return (
                 <tr key={note.id}>
-                    <th scope="row"></th>
+                    {/* <th scope="row"></th> */}
                     <td>{note.content}</td>
                     <td>
-                         <Button color="warning" onClick={() => {
+                         <Button className="noteButtons" color="warning" onClick={() => {
                             this.editUpdateNote(note)
                             this.updateOn() }}>
                             Update</Button>
-                            </td>
-                            <td>
-                        <Button color="danger"
+                            
+                        <Button className="noteButtons" color="danger"
                             onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>
                     </td>
@@ -106,9 +105,8 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
 
     render() {
         return (
-            <Container>
-                <Row>
-                    <Col md="3">
+            <div>
+                    <Col>
                         {this.props.selectedGame &&
                             <NoteCreate 
                             games={this.state.games} 
@@ -117,14 +115,14 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
                             fetchNotes={this.fetchNotes} noteMapper={this.noteMapper}
                             />}
                     </Col>
-                    <Col md="9">
-                    {this.props.selectedGame &&
+                    <br/>
+                    <Col>
+                    {this.props.selectedGame && this.state.notes.length > 0 &&
                         <NoteDisplay games={this.state.games} notes={this.state.notes} token={this.props.token} selectedGame={this.props.selectedGame} fetchNotes={this.fetchNotes} updateOn={this.updateOn} editUpdateNote={this.editUpdateNote} noteMapper={this.noteMapper}
                         />}
                     </Col>
                     {this.props.selectedGame && this.state.updateActive && this.state.noteToUpdate ? <NoteEdit noteToUpdate={this.state.noteToUpdate} updateOff={this.updateOff} token={this.props.token} fetchNotes={this.fetchNotes} selectedGame={this.props.selectedGame} /> : <></>}
-                </Row>
-            </Container>
+            </div>
         )
     }
 }

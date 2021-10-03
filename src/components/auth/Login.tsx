@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, FormGroup, Label, Input, Button, Badge, Col, Container } from 'reactstrap'
+import './Auth.css'
+import { Form, FormGroup, Label, Input, Button, Col, Container } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import APIURL from '../../helpers/environment'
 
