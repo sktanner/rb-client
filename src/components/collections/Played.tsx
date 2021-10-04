@@ -1,4 +1,5 @@
 import React from 'react'
+import './Collections.css'
 import { game } from '../../types'
 import GameEdit from '../game/GameEdit'
 
@@ -43,17 +44,16 @@ class Played extends React.Component<PlayedProps, PlayedState> {
     }
 
     render() {
-        console.log(this.props.playedGames)
         return (
-            <div className="colCardSpacing">
+            <div className='colCardSpacing'>
 
-                {this.props.playedGames.length === 0 && "Add some Games!"}
+                {this.props.playedGames.length === 0 && 'Add some Games!'}
 
                 {this.props.playedGames && this.props.playedGames.map((game: game) => {
                     return (
                         <div>
                             <a onClick={() => { this.setSelectedGame(game); this.updateOn() }}>
-                                <img className="colCardImg" src={game.thumb_url} alt='Game logo' />
+                                <img className='colCardImg' src={game.thumb_url} alt='Game logo' />
                             </a>
 
 

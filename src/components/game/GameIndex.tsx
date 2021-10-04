@@ -1,4 +1,5 @@
 import React from 'react'
+import './Game.css'
 import { Container, Row, Col, Button } from 'reactstrap'
 import GameCreate from './GameCreate'
 import GameEdit from './GameEdit'
@@ -32,7 +33,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
     }
 
     async fetchGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game`, {
             method: 'GET',
             headers: new Headers({
@@ -56,7 +56,6 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
 
     componentDidMount(): void {
         this.fetchGames()
-        // this.fetchOwnedGames()
     }
 
     render() {
@@ -65,10 +64,10 @@ class GameIndex extends React.Component<GameIndexProps, GameIndexState> {
                 <Row>
                 </Row>
                 <Row>
-                    <Col md="3">
+                    <Col md='3'>
                         {/* <GameCreate fetchGames={this.fetchGames} token={this.props.token} /> */}
                     </Col>
-                    <Col md="9">
+                    <Col md='9'>
                         <GameDisplay games={this.state.games} updateOn={this.updateOn} fetchGames={this.fetchGames} token={this.props.token}
                         setSelectedGame={this.setSelectedGame} />
                     </Col>

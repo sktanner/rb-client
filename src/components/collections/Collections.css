@@ -1,0 +1,93 @@
+.cardImg {
+  width:  200px;
+  height: 200px;
+  object-fit: fill;
+  padding-bottom: 10px;
+}
+
+
+/* Collections */
+
+.collectionSpacing {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+
+/* Game Info */
+
+.gameInfoCard {
+  align-items: center;
+  border: none !important;
+  width: 300px;
+  height: 350px;
+}
+
+.gameInfoImg {
+  max-height: 345px;
+}
+
+.modalBody {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.addToColl {
+  width: 300px !important;
+}
+
+
+/* Search Page */
+
+.searchBar.form-control {
+  width: 400px;
+  margin-right: 20px;
+}
+
+.searchSpacing {
+  margin-left: 34%;
+}
+
+.cardDiv {
+  margin: 20px;
+  width: 300px;
+  height: 350px;
+  align-items: center;
+}
+
+.cardTitle {
+  height: 50px;
+}
+
+
+/* Owned, Played, WtB, & WtP */
+
+.cardSpacing {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.colCardSpacing {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: 2px solid black;
+  margin: 30px;
+  padding: 10px;
+}
+
+.colCardImg {
+  width:  100px;
+  height: 100px;
+  object-fit: fill;
+  margin: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.colCardImg:hover {
+  transform: scale(1.2) perspective(0pc);
+}

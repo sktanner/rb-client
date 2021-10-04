@@ -1,4 +1,5 @@
 import React from 'react'
+import './Note.css'
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
@@ -20,7 +21,7 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
     constructor(props: NoteEditProps) {
         super(props)
         this.state = {
-            content: "",
+            content: '',
             gameId: this.props.selectedGame.id
         }
         this.noteUpdate = this.noteUpdate.bind(this)
@@ -52,10 +53,10 @@ class NoteEdit extends React.Component<NoteEditProps, NoteEditState> {
                 <ModalBody>
                     <Form onSubmit={this.noteUpdate}>
                         <FormGroup>
-                            <Label htmlFor="content">Edit Content:</Label>
-                            <Input name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
+                            <Label htmlFor='content'>Edit Content:</Label>
+                            <Input name='content' value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
                         </FormGroup>
-                        <Button color="warning" type="submit">Update the Note</Button>
+                        <Button color='warning' type='submit'>Update the Note</Button>
                     </Form>
                 </ModalBody>
             </Modal>

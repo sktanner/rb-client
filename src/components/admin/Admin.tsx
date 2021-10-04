@@ -34,7 +34,6 @@ class Admin extends React.Component<AdminProps, AdminState> {
     }
 
     deleteUser(user: user) {
-        // console.info(user.id)
         fetch(`${APIURL}/user/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -48,11 +47,11 @@ class Admin extends React.Component<AdminProps, AdminState> {
         return this.state.users.map((user: user) => {
             return (
                 <tr key={user.id}>
-                    <th scope="row">{user.id}</th>
+                    <th scope='row'>{user.id}</th>
                     <td>{user.email}</td>
                     <td>{user.isAdmin}</td>
                     <td>
-                    <Button color="danger" onClick={() => { this.deleteUser(user) }}>Delete</Button>
+                    <Button color='danger' onClick={() => { this.deleteUser(user) }}>Delete</Button>
                     </td>
                 </tr>
             )

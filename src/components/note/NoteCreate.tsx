@@ -1,4 +1,5 @@
 import React from 'react'
+import './Note.css'
 import { Button, Form, Label, Input } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game } from '../../types'
@@ -20,7 +21,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
     constructor(props: NoteCreateProps) {
         super(props)
         this.state = {
-            content: "",
+            content: '',
             gameId: this.props.selectedGame.id 
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,8 +38,7 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
             })
         })
         let json = await res.json()
-        console.info(json)
-        this.setState({ content: "" })
+        this.setState({ content: '' })
         this.props.fetchNotes()  
     }
 
@@ -46,12 +46,12 @@ class NoteCreate extends React.Component<NoteCreateProps, NoteCreateState> {
         return (
             <div>
                 <h5>Add a note!</h5>
-                <Form inline className="addNote" onSubmit={this.handleSubmit}>
+                <Form inline className='addNote' onSubmit={this.handleSubmit}>
                     
-                        <Label htmlFor="content" />
-                        <Input className="noteInput" name="content" value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
+                        <Label htmlFor='content' />
+                        <Input className='noteInput' name='content' value={this.state.content} onChange={(e) => this.setState({ content: e.target.value })} />
                     
-                    <Button className="addNoteButton" color="warning" type="submit">Submit</Button>
+                    <Button className='addNoteButton' color='warning' type='submit'>Submit</Button>
                 </Form>
             </div>
         )

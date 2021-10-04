@@ -1,4 +1,5 @@
 import React from 'react'
+import './Game.css'
 import APIURL from '../../helpers/environment'
 import { Button, ModalFooter, Label, Input, Modal, ModalHeader, ModalBody, Row, Col, Card, CardImg } from 'reactstrap'
 import { game } from '../../types'
@@ -32,7 +33,6 @@ class GameEdit extends React.Component<GameEditProps, game> {
     }
 
     async gameUpdate(e: React.MouseEvent<HTMLButtonElement>): Promise<void> {
-        console.info(this.props.selectedGame)
         e.preventDefault()
         try {
             let res = await fetch(`${APIURL}/game/${this.props.selectedGame.id}`, {
@@ -50,7 +50,6 @@ class GameEdit extends React.Component<GameEditProps, game> {
             this.props.fetchWantToBuyGames()
             this.props.fetchWantToPlayGames()
             this.props.updateOff()
-            console.info(json)
         } catch (err) {
             console.info(err)
         }
@@ -72,13 +71,13 @@ class GameEdit extends React.Component<GameEditProps, game> {
 
     render() {
         return (
-            <Modal size="lg" isOpen={true}>
+            <Modal size='lg' isOpen={true}>
                 <ModalHeader>{this.state.name}</ModalHeader>
                 <ModalBody>
                     <Row>
                         <Col>
-                            <Card className="gameInfoCard">
-                                <CardImg className="gameInfoImg" src={this.props.selectedGame.thumb_url} />
+                            <Card className='gameInfoCard'>
+                                <CardImg className='gameInfoImg' src={this.props.selectedGame.thumb_url} />
 
                             </Card>
                         </Col>
@@ -91,26 +90,26 @@ class GameEdit extends React.Component<GameEditProps, game> {
                     <Row>
                         <Description selectedGame={this.props.selectedGame} />
                         <br />
-                        <Col md="4">
-                            <Label htmlFor="collection">Edit Collection:</Label>
-                            <Input className="gameUpdate" type="select" name="collection" value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
-                                <option value="" selected disabled>Select</option>
-                                <option value="WantToPlay">Want to play</option>
-                                <option value="Played">Played</option>
-                                <option value="WantToBuy">Want to buy</option>
-                                <option value="Owned">Owned</option>
+                        <Col md='4'>
+                            <Label htmlFor='collection'>Edit Collection:</Label>
+                            <Input className='gameUpdate' type='select' name='collection' value={this.state.collection} onChange={(e) => this.setState({ collection: e.target.value })}>
+                                <option value='' selected disabled>Select</option>
+                                <option value='WantToPlay'>Want to play</option>
+                                <option value='Played'>Played</option>
+                                <option value='WantToBuy'>Want to buy</option>
+                                <option value='Owned'>Owned</option>
                             </Input>
                         </Col>
-                        <Col className="gameEditButtons">
-                            <Button className="editButton" color="warning" type="submit" onClick={(e) => { this.gameUpdate(e) }}>Update the Game</Button>
+                        <Col className='gameEditButtons'>
+                            <Button className='editButton' color='warning' type='submit' onClick={(e) => { this.gameUpdate(e) }}>Update the Game</Button>
 
                             {this.props.selectedGame &&
-                                <Button color="danger" onClick={() => { this.deleteGame(); this.props.setSelectedGame(null) }}>Remove from My Games</Button>}
+                                <Button color='danger' onClick={() => { this.deleteGame(); this.props.setSelectedGame(null) }}>Remove from My Games</Button>}
                         </Col>
                     </Row>
                     <br />
                     <ModalFooter>
-                        <Button color="danger" onClick={() => this.props.setSelectedGame(null)}>Cancel</Button>
+                        <Button color='danger' onClick={() => this.props.setSelectedGame(null)}>Cancel</Button>
                     </ModalFooter>
                 </ModalBody>
             </Modal>

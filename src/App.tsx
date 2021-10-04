@@ -11,7 +11,7 @@ import {
   Route,
   Link,
   Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
 import Collections from './components/collections/Collections'
 import NavLogo from './assets/NavLogo.png'
 
@@ -26,8 +26,8 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props)
     this.state = {
-      token: "",
-      isAdmin: ""
+      token: '',
+      isAdmin: ''
     }
   }
 
@@ -73,23 +73,23 @@ class App extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         {this.state.token && (
           <Navbar>
-            <NavbarBrand className="NavLogo">
+            <NavbarBrand className='NavLogo'>
               <img src={NavLogo}></img>
             </NavbarBrand>
 
-            <div className="navLinks">
-              {this.state.isAdmin === "true" &&
-                <Link to="/admin" className="link">Admin</Link>}
+            <div className='navLinks'>
+              {this.state.isAdmin === 'true' &&
+                <Link to='/admin' className='link'>Admin</Link>}
 
-              <Link to="/search" className="link">Search</Link>
+              <Link to='/search' className='link'>Search</Link>
 
-              <Link to="/collections" className="link">My Collections</Link>
+              <Link to='/collections' className='link'>My Collections</Link>
 
               <Link to='/'>
-                <Button color="warning" onClick={this.clearToken}>Logout</Button>
+                <Button color='warning' onClick={this.clearToken}>Logout</Button>
               </Link>
             </div>
           </Navbar>
@@ -99,16 +99,16 @@ class App extends React.Component<AppProps, AppState> {
           <Route exact path='/'>
             {this.protectedViews}
           </Route>
-          <Route path="/gameindex">
-            {this.state.token ? <GameIndex token={this.state.token} /> : <Redirect to="/" />}
+          <Route path='/gameindex'>
+            {this.state.token ? <GameIndex token={this.state.token} /> : <Redirect to='/' />}
           </Route>
-          <Route path="/search">
+          <Route path='/search'>
             <SearchPage token={this.state.token} />
           </Route>
-          <Route path="/collections">
-            {this.state.token ? <Collections token={this.state.token} /> : <Redirect to="/" />}
+          <Route path='/collections'>
+            {this.state.token ? <Collections token={this.state.token} /> : <Redirect to='/' />}
           </Route>
-          <Route exact path="/admin">
+          <Route exact path='/admin'>
             {this.adminViews}
           </Route>
         </Switch>

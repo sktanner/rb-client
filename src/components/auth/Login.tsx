@@ -19,8 +19,8 @@ class Login extends React.Component<LoginProps, LoginState> {
     constructor(props: LoginProps) {
         super(props)
         this.state = {
-            email: "",
-            password: ""
+            email: '',
+            password: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -37,32 +37,31 @@ class Login extends React.Component<LoginProps, LoginState> {
         let json = await res.json()
         this.props.updateToken(json.sessionToken)
         this.props.updateIsAdmin(json.user.isAdmin)
-        console.log(json);
     }
 
     render(){
     return(
-        <Container fluid="sm">
-        <div className="authForm">
+        <Container fluid='sm'>
+        <div className='authForm'>
             <h1>Login</h1>
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
-                    <Label sm={3} htmlFor="email">Email:</Label>
+                    <Label sm={3} htmlFor='email'>Email:</Label>
                     <Col sm={8}>
-                    <Input onChange={(e) => this.setState({email:e.target.value})} name="email" value={this.state.email}/>
+                    <Input onChange={(e) => this.setState({email:e.target.value})} name='email' value={this.state.email}/>
                     </Col>
                 </FormGroup>
                 <br />
                 <FormGroup row>
-                    <Label sm={3} htmlFor="password">Password:</Label>
+                    <Label sm={3} htmlFor='password'>Password:</Label>
                     <Col sm={8}>
-                    <Input onChange={(e) => this.setState({password:e.target.value})} name="password" value={this.state.password}/>
+                    <Input onChange={(e) => this.setState({password:e.target.value})} name='password' value={this.state.password}/>
                     </Col>
                 </FormGroup>
                 <br />
-                <Button type="submit"  color="warning">Login</Button>
+                <Button type='submit'  color='warning'>Login</Button>
                 <br />
-                <Link to="" className="authLink" onClick={this.props.togglePortal}>Don't have an account?</Link>
+                <Link to='' className='authLink' onClick={this.props.togglePortal}>Don't have an account?</Link>
             </Form>
         </div>
         </Container>

@@ -25,7 +25,7 @@ class Description extends React.Component<DescriptionProps, DescriptionState> {
     render() {
         return (
             <div>
-                <Button color="warning" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Description</Button>
+                <Button color='warning' onClick={this.toggle} style={{ marginBottom: '1rem' }}>Description</Button>
                 <Collapse isOpen={this.state.isOpen}>
                     <Card>
                         <CardBody>

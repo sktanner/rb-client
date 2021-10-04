@@ -1,18 +1,27 @@
 .AppLogo {
-    height: 125px;
-    width: 310px;
-    margin: 20px;
-    float: left
-  }
+  height: 125px;
+  width: 310px;
+  margin: 20px;
+  float: left
+}
 
 .authContainer {
   margin-top: 7%;
 }
 
 .authForm {
-    margin: auto;
-    padding: 10px;
-    width: 50%;
-    background-color: #f04f54;
-    border-radius: 7px;
+  margin: auto;
+  padding: 10px;
+  width: 50%;
+  background-color: #f04f54;
+  border-radius: 7px;
+}
+
+.authLink {
+  text-decoration: none;
+  color: white;
+}
+
+.authLink:hover {
+  color: black
 }

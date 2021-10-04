@@ -1,4 +1,5 @@
 import React from 'react'
+import './Note.css'
 import { Table } from 'reactstrap'
 import { game, note } from '../../types'
 

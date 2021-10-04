@@ -1,4 +1,5 @@
 import React from 'react'
+import './Game.css'
 import { Table, Button } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game } from '../../types'
@@ -16,7 +17,6 @@ type GameDisplayState = {}
 class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
 
     deleteGame(game: game) {
-        // console.info(game.id)
         fetch(`${APIURL}/game/${game.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -28,7 +28,6 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
 
     gameMapper(): JSX.Element[] {
         return this.props.games.map((game: game) => {
-            // console.log(this.props.games);
 
             return (
                 <tr key={game.id}>
@@ -36,17 +35,17 @@ class GameDisplay extends React.Component<GameDisplayProps, GameDisplayState> {
                     <td>{game.description.replace(/<[^>]+>/g, '')}</td>
                     <td>{game.collection}</td>
                     <td>
-                        <Button color="warning" onClick={() => {
+                        <Button color='warning' onClick={() => {
                             this.props.setSelectedGame(game)
                             this.props.updateOn()
                         }}>Update
                         </Button>
                     </td>
                     <td>
-                        <Button color="danger" onClick={() => { this.deleteGame(game) }}>Delete</Button>
+                        <Button color='danger' onClick={() => { this.deleteGame(game) }}>Delete</Button>
                     </td>
                     <td>
-                        <Button color="success" onClick={() => { this.props.setSelectedGame(game) }}>Leave a note!</Button>
+                        <Button color='success' onClick={() => { this.props.setSelectedGame(game) }}>Leave a note!</Button>
                     </td>
                 </tr>
             )

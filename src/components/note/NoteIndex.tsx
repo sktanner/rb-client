@@ -1,4 +1,5 @@
 import React from 'react'
+import './Note.css'
 import { Col, Button } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
@@ -47,7 +48,6 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
         })
         let json = await res.json()
         this.setState({ notes: json })
-        console.info(json)
     }
 
     editUpdateNote = (notes: note): void => {
@@ -67,21 +67,19 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
     }
 
     noteMapper(): JSX.Element[] {
-        console.log(this.state.notes);
         
         return this.state.notes.map((note: note) => {
 
             return (
                 <tr key={note.id}>
-                    {/* <th scope="row"></th> */}
                     <td>{note.content}</td>
                     <td>
-                         <Button className="noteButtons" color="warning" onClick={() => {
+                         <Button className='noteButtons' color='warning' onClick={() => {
                             this.editUpdateNote(note)
                             this.updateOn() }}>
                             Update</Button>
                             
-                        <Button className="noteButtons" color="danger"
+                        <Button className='noteButtons' color='danger'
                             onClick={() => { this.deleteNote(note) }}>
                             Delete</Button>
                     </td>
@@ -91,8 +89,6 @@ class NoteIndex extends React.Component<NoteIndexProps, NoteIndexState> {
     }
 
     deleteNote(note: note) {
-        console.log(note);
-        
         fetch(`${APIURL}/note/${note.id}`, {
             method: 'DELETE',
             headers: new Headers({

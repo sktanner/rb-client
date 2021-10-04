@@ -1,0 +1,15 @@
+.noteButtons {
+  margin: 5px;
+}
+
+.addNoteButton {
+  margin-left: 10px;
+}
+
+.addNote {
+  margin: 0 !important;
+}
+
+.noteInput {
+  width: 290px !important;
+}

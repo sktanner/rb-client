@@ -1,4 +1,5 @@
 import React from 'react'
+import './Collections.css'
 import { Row, Col } from 'reactstrap'
 import APIURL from '../../helpers/environment'
 import { game, note } from '../../types'
@@ -39,7 +40,6 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
     }
 
     async fetchGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game`, {
             method: 'GET',
             headers: new Headers({
@@ -52,7 +52,6 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
     }
 
     async fetchOwnedGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game/Owned`, {
             method: 'GET',
             headers: new Headers({
@@ -61,13 +60,10 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
             })
         })
         let json = await res.json()
-        // console.log(json)
         this.setState({ ownedGames: json })
-        console.info(this.state.ownedGames)
     }
 
     async fetchPlayedGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game/Played`, {
             method: 'GET',
             headers: new Headers({
@@ -77,11 +73,9 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
         })
         let json = await res.json()
         this.setState({ playedGames: json })
-        console.info(this.state.playedGames)
     }
 
     async fetchWantToBuyGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game/WantToBuy`, {
             method: 'GET',
             headers: new Headers({
@@ -91,11 +85,9 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
         })
         let json = await res.json()
         this.setState({ wantToBuyGames: json })
-        console.info(this.state.wantToBuyGames)
     }
 
     async fetchWantToPlayGames(): Promise<void> {
-        console.info(this.props.token)
         let res = await fetch(`${APIURL}/game/WantToPlay`, {
             method: 'GET',
             headers: new Headers({
@@ -105,7 +97,6 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
         })
         let json = await res.json()
         this.setState({ wantToPlayGames: json })
-        console.info(this.state.wantToPlayGames)
     }
 
 
@@ -118,7 +109,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     render() {
         return (
-            <div className="collectionSpacing">
+            <div className='collectionSpacing'>
                 <Row>
                     <Col>
                     <h3>Owned</h3>

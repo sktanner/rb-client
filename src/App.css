@@ -5,6 +5,9 @@
   height: 100vh;
 }
 
+
+/* Navbar */
+
 .NavLogo {
   float: left !important;
   margin-top: -15px !important;
@@ -22,9 +25,8 @@
   align-items: center;
 }
 
-.row {
-  --bs-gutter-x: none !important;
-}
+
+/* Other */
 
 .link {
   text-decoration: none;
@@ -36,128 +38,12 @@
   color: #f04f54;
 }
 
-.authLink {
-text-decoration: none;
-color: white;
-}
-
-.authLink:hover {
-  color: black
-}
-
-.thumb {
-  max-height: 100px;
-}
-
-.cardDiv {
-  margin: 20px;
-  width: 300px;
-  height: 350px;
-  align-items: center;
-}
-
-.cardSpacing {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.collectionSpacing {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 50px;
-}
-
-.colCardSpacing {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  border: 2px solid black;
-  margin: 30px;
-  padding: 10px;
+.row {
+  --bs-gutter-x: none !important;
 }
 
 .card-body {
   padding: 5px;
-}
-
-.cardTitle {
-  height: 50px;
-}
-
-.cardImg {
-  width:  200px;
-  height: 200px;
-  object-fit: fill;
-  padding-bottom: 10px;
-}
-
-.gameInfoCard {
-  align-items: center;
-  border: none !important;
-  width: 300px;
-  height: 350px;
-}
-
-.colCardImg {
-  width:  100px;
-  height: 100px;
-  object-fit: fill;
-  margin: 5px;
-  cursor: pointer;
-  position: relative;
-}
-
-.colCardImg:hover {
-  transform: scale(1.2) perspective(0pc);
-}
-
-.gameInfoImg {
-  max-height: 345px;
-}
-
-.addToColl {
-  width: 300px !important;
-}
-
-.gameEditButtons {
-  margin-top: 24px !important;
-  margin-left: 10px;
-}
-
-.editButton {
-  margin-right: 10px;
-}
-
-.noteButtons {
-  margin: 5px;
-}
-
-.addNoteButton {
-  margin-left: 10px;
-}
-
-.addNote {
-  margin: 0 !important;
-}
-
-.noteInput {
-  width: 290px !important;
-}
-
-.modalBody {
-  height: 400px;
-  overflow-y: scroll;
-}
-
-.searchBar.form-control {
-  width: 400px;
-  margin-right: 20px;
-}
-
-.searchSpacing {
-  margin-left: 34%;
 }
 
 .form-inline {

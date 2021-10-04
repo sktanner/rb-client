@@ -1,4 +1,5 @@
 import React from 'react'
+import './Collections.css'
 import { Button, Input, Card, CardBody, CardTitle, Form, FormGroup } from 'reactstrap'
 import { game } from '../../types'
 import GameInfo from './GameInfo'
@@ -26,10 +27,10 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
             games: [],
             updateActive: false,
             selectedGame: null,
-            nameSearch: "",
-            name: "",
-            description: "",
-            thumb_url: "",
+            nameSearch: '',
+            name: '',
+            description: '',
+            thumb_url: '',
             modal: false,
             gameId: 0
         }
@@ -41,7 +42,6 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
         let res = await fetch(`https://api.boardgameatlas.com/api/search?name=${this.state.nameSearch}&client_id=Kt62SmliZz`)
         let json = await res.json()
 
-        console.info(json);
         this.setState({ games: json.games })
     }
     searchFunction(value: string) {
@@ -69,23 +69,23 @@ class CollectionsIndex extends React.Component<CollectionsProps, CollectionsStat
                 <h3>Search for a Game!</h3>
                 <br />
                 <Form inline>
-                    <FormGroup className="searchSpacing">
-                        <Input className="searchBar" type="text" placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
+                    <FormGroup className='searchSpacing'>
+                        <Input className='searchBar' type='text' placeholder='Search Here' onChange={e => this.searchFunction(e.target.value.replace(/\s/g, '+'))} />
                     </FormGroup>
-                    <Button color="warning" onClick={() => this.APIfetch()}>Submit</Button>
+                    <Button color='warning' onClick={() => this.APIfetch()}>Submit</Button>
                 </Form>
                 <br />
 
-                <div className="cardSpacing">
+                <div className='cardSpacing'>
                     {this.state.games.map((game: game) => {
                         return (
-                            <div className="cardDiv">
-                                <Card fluid="sm">
-                                    <CardBody className="cardStyle">
-                                        <CardTitle className="cardTitle" tag="h5">{game.name}</CardTitle>
-                                        <img className="cardImg" src={game.thumb_url} alt='Game logo' />
+                            <div className='cardDiv'>
+                                <Card fluid='sm'>
+                                    <CardBody className='cardStyle'>
+                                        <CardTitle className='cardTitle' tag='h5'>{game.name}</CardTitle>
+                                        <img className='cardImg' src={game.thumb_url} alt='Game logo' />
 
-                                        <Button color="warning" onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
+                                        <Button color='warning' onClick={() => { this.setSelectedGame(game) }}>View Game</Button>
                                     </CardBody>
                                 </Card>
                             </div>
