@@ -16,8 +16,6 @@
 }
 
 .tooltip {
-  position: relative;
-  display: inline-block;
   opacity: 1 !important;
   padding-bottom: 20px;
 }
