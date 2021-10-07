@@ -7,6 +7,7 @@ import Owned from './Owned'
 import Played from './Played'
 import WantToBuy from './WantToBuy'
 import WantToPlay from './WantToPlay'
+import Meeple from '../../assets/meeple.png'
 
 type CollectionsProps = {
     token: string
@@ -101,6 +102,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
 
     componentDidMount(): void {
+        this.fetchGames()
         this.fetchOwnedGames()
         this.fetchPlayedGames()
         this.fetchWantToBuyGames()
@@ -109,6 +111,18 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
 
     render() {
         return (
+            <>
+            {this.state.games.length === 0 &&
+                    <>
+                        <div className="meepleSpacing">
+                            <div className='tooltip'>
+                                <img className="meeple" src={Meeple}></img>
+                                Hey, Listen! <span className='tooltiptext'>This page shows the games in your collection! You can search for games by title on the search page and add them to these categories. Happy Gaming!</span></div>
+                        </div>
+                        <br />
+                        <br />
+                    </>
+                }
             <div className='collectionSpacing'>
                 <Row>
                     <Col>
@@ -131,6 +145,7 @@ class Collections extends React.Component<CollectionsProps, CollectionsState> {
                     </Col>
                 </Row>
             </div>
+            </>
         )
     }
 }
